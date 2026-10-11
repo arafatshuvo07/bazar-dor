@@ -10,7 +10,7 @@ Project setup-এর পরে shared layout তৈরি হয়েছে: Hind 
 
 Home page-এ supplied design-এর hero, সবচেয়ে বেশি দাম বাড়া/কমা পণ্য এবং সব পণ্যের তালিকা তৈরি হয়েছে। Navbar-এর নিচে API data দিয়ে চলমান price ticker আছে।
 
-Category pages, authentication, protected product details ও profile পরবর্তী ধাপে তৈরি হবে। Category, account ও product card links-এর গন্তব্য page এখনো তৈরি হয়নি।
+Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Authentication, protected product details ও profile পরবর্তী ধাপে তৈরি হবে। Account ও product card links-এর গন্তব্য page এখনো তৈরি হয়নি।
 
 ## প্রযুক্তি
 
@@ -24,10 +24,11 @@ Next.js App Router, React, TypeScript, Tailwind CSS, Radix UI, Better Auth, Reac
 4. চলমান price ticker, pause control ও reduced-motion support।
 5. Hero থেকে একই পেজের সব পণ্যের তালিকায় যাওয়ার button।
 6. Home-এর loading skeleton, empty state এবং error হলে retry।
+7. Dynamic category route, API filtering ও loading skeleton।
 
 ## পরবর্তী কাজ
 
-Category filter ও numeric sorting, Better Auth দিয়ে email/password ও social login, protected product details এবং My Profile থেকে নাম update।
+Category numeric sorting, Better Auth দিয়ে email/password ও social login, protected product details এবং My Profile থেকে নাম update।
 
 ## চালানোর নিয়ম
 

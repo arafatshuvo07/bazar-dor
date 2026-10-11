@@ -44,13 +44,16 @@ function isProduct(value: unknown): value is Product {
   );
 }
 
-async function loadProducts(): Promise<Product[]> {
+async function loadProducts(category?: string): Promise<Product[]> {
   "use cache";
   cacheLife({ stale: 300, revalidate: 300, expire: 3600 });
 
   for (const endpoint of productEndpoints) {
     try {
-      const response = await fetch(endpoint, {
+      const url = new URL(endpoint);
+      if (category) url.searchParams.set("category", category);
+
+      const response = await fetch(url, {
         headers: { Accept: "application/json" },
         signal: AbortSignal.timeout(5000),
       });
@@ -58,7 +61,10 @@ async function loadProducts(): Promise<Product[]> {
       if (!response.ok) continue;
 
       const data: unknown = await response.json();
-      if (Array.isArray(data) && data.every(isProduct)) return data;
+      if (
+        Array.isArray(data) && data.every(isProduct) &&
+        (!category || data.every((product) => product.category === category))
+      ) return data;
     } catch {
       continue;
     }

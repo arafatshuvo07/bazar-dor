@@ -607,6 +607,28 @@ a.product-card:hover {
   50% { opacity: 0.5; }
 }
 
+.category-page { padding-block: 24px 48px; }
+
+.category-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 94px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.category-heading-icon { flex-shrink: 0; font-size: 36px; line-height: 40px; }
+.category-heading h1 { margin: 0; font-size: 24px; font-weight: 700; line-height: 32px; }
+.category-heading p, .category-count { margin: 0; color: var(--muted); font-size: 14px; line-height: 20px; }
+.category-catalog { margin-top: 24px; }
+.category-count { margin-bottom: 16px; }
+.category-message h1 { margin: 0 0 8px; color: var(--foreground); font-size: 24px; font-weight: 700; line-height: 32px; }
+.category-message p { margin: 0 0 16px; }
+.category-message .category-status { color: var(--primary-hover); font-size: 36px; font-weight: 700; }
+
 @media (max-width: 1023px) {
   .hero { grid-template-columns: minmax(0, 1fr) 260px; gap: 20px; padding: 24px; }
   .hero-image { width: 260px; }

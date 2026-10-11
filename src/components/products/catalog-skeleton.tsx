@@ -1,4 +1,4 @@
-function SkeletonCards({ count }: { count: number }) {
+export function SkeletonCards({ count }: { count: number }) {
   return (
     <div className="product-grid" aria-hidden="true">
       {Array.from({ length: count }, (_, index) => (
