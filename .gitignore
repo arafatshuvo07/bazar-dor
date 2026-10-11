@@ -40,5 +40,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local codebase index
+# local development files
+/AGENTS.md
+/CLAUDE.md
+/.agents/
+/.codex/
+/.claude/
 /.codebase-memory/
+/.cursor/
+/.cursorrules
+/.mcp.json
