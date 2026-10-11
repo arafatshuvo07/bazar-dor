@@ -17,7 +17,14 @@ export function AuthNotifications() {
   const oauthError = pathname === "/signin" && searchParams.has("error");
   const loginRequired = pathname === "/signin" && searchParams.get("reason") === "login-required";
 
+  const profileLoginRequired = pathname === "/signin" && searchParams.get("reason") === "profile-login-required";
+
   useEffect(() => {
+    if (profileLoginRequired) {
+      toast.error("প্রোফাইল দেখতে আগে সাইন ইন করুন।", { id: "profile-login-required" });
+      router.replace("/signin", { scroll: false });
+      return;
+    }
     if (loginRequired) {
       toast.error("পণ্যের বিস্তারিত দেখতে আগে সাইন ইন করুন।", { id: "login-required" });
       router.replace("/signin", { scroll: false });
@@ -37,7 +44,7 @@ export function AuthNotifications() {
         }
       } catch {}
     }
-  }, [session?.user, pathname, oauthError, loginRequired, router]);
+  }, [session?.user, pathname, oauthError, loginRequired, profileLoginRequired, router]);
 
   return null;
 }

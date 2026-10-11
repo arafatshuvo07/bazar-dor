@@ -10,7 +10,7 @@ Project setup-এর পরে shared layout তৈরি হয়েছে: Hind 
 
 Home page-এ supplied design-এর hero, সবচেয়ে বেশি দাম বাড়া/কমা পণ্য এবং সব পণ্যের তালিকা তৈরি হয়েছে। Navbar-এর নিচে API data দিয়ে চলমান price ticker আছে।
 
-Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Email/password authentication, Sign In/Sign Up, session অনুযায়ী Navbar ও logout তৈরি হয়েছে। Google/GitHub OAuth wiring আছে; provider credentials যোগ করা ও আসল social login যাচাই বাকি। Protected product details-এ server session যাচাই, product summary, category link, বাজারভিত্তিক table এবং সর্বনিম্ন/সর্বাধিক/গড় দাম আছে। My Profile-এর কাজ বাকি।
+Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Email/password authentication, Sign In/Sign Up, session অনুযায়ী Navbar ও logout তৈরি হয়েছে। Google/GitHub OAuth wiring আছে; provider credentials যোগ করা ও আসল social login যাচাই বাকি। Protected product details-এ server session যাচাই, product summary, category link, বাজারভিত্তিক table এবং সর্বনিম্ন/সর্বাধিক/গড় দাম আছে। Protected My Profile-এ বর্তমান নাম, ইমেইল ও sign out আছে; নাম update-এর কাজ পরের ধাপে।
 
 ## প্রযুক্তি
 
@@ -29,6 +29,7 @@ Next.js App Router, React, TypeScript, Tailwind CSS, Radix UI, Better Auth, Reac
 9. Better Auth email signup/login, persistent session ও logout।
 10. Form validation, password visibility, বাংলা toast এবং account dropdown।
 11. Protected product details, বাজারের দাম ও সর্বনিম্ন/সর্বাধিক/গড় summary।
+12. Reference অনুযায়ী protected My Profile, নাম/ইমেইল ও sign out।
 
 ## পরবর্তী কাজ
 
