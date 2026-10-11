@@ -24,7 +24,7 @@ Next.js App Router, React, TypeScript, Tailwind CSS, Better Auth, PostgreSQL/SQL
 
 ## Local setup
 
-Use Node.js 22.18 or newer and npm.
+Use Node.js 24 and npm.
 
 ```bash
 npm ci
