@@ -50,3 +50,10 @@ next-env.d.ts
 /.cursor/
 /.cursorrules
 /.mcp.json
+
+# authentication configuration and local database
+!.env.example
+/.data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal

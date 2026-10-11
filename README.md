@@ -33,11 +33,14 @@ Better Auth দিয়ে email/password ও social login, protected product deta
 
 ## চালানোর নিয়ম
 
-Node.js 22 বা নতুন সংস্করণ এবং npm ব্যবহার করুন।
+Node.js 22.18 বা নতুন সংস্করণ এবং npm ব্যবহার করুন।
 
 ```bash
 npm ci
-npm run dev
+cp .env.example .env.local
+# .env.local-এ BETTER_AUTH_SECRET এবং BETTER_AUTH_URL বসান
+npm run db:migrate
+npm run dev -- --port 3001
 ```
 
 Default local address: http://localhost:3000। Port ব্যবহৃত থাকলে terminal-এ দেখানো address ব্যবহার করুন।
@@ -99,3 +102,13 @@ Live website link deployment-এর পরে যোগ করা হবে।
 ## Dependency check
 
 Setup-এর সময় `npm audit --omit=dev`-এ কোনো vulnerability পাওয়া যায়নি। Full audit-এ ESLint-এর transitive dependency chain-এ ৫টি high advisory এসেছে; সংশ্লিষ্ট `braces` package-এর patched release এখনো npm-এ পাওয়া যায়নি। Framework downgrade করে automatic force-fix প্রয়োগ করা হয়নি।
+
+## Authentication setup
+
+Better Auth-এর email/password server, session API এবং database migration যুক্ত হয়েছে। `BETTER_AUTH_SECRET`-এ অন্তত ৩২ অক্ষরের random secret দিন (`openssl rand -base64 48`)। `BETTER_AUTH_URL` browser-এর origin-এর সঙ্গে মিলতে হবে; local setup-এ `http://localhost:3001`।
+
+SQLite database `DATABASE_PATH`-এ স্থায়ীভাবে সংরক্ষণ হয়। `.env.local`, database ও journal files Git-এ রাখা হয় না। Schema তৈরি/পরিবর্তনের জন্য `npm run db:migrate`; authentication পরীক্ষা করতে `npm run test:auth`।
+
+Google OAuth app-এর redirect URI: `<BETTER_AUTH_URL>/api/auth/callback/google`। GitHub OAuth app-এর callback: `<BETTER_AUTH_URL>/api/auth/callback/github`। নিজস্ব provider app-এর client ID ও secret `.env.local`-এর সংশ্লিষ্ট চারটি variable-এ বসাতে হবে। Credentials না থাকলে সংশ্লিষ্ট social button বন্ধ থাকে।
+
+বর্তমান SQLite setup local বা persistent disk-সহ Node hosting-এর জন্য। Vercel/Netlify-এর ephemeral filesystem-এ এই database deploy করা যাবে না; deployment ধাপে persistent hosted database যুক্ত করতে হবে।
