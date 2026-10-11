@@ -9,7 +9,7 @@ export function RefreshButton() {
 
   return (
     <button
-      className="button button-primary button-sm"
+      className="btn btn-primary btn-sm sm:btn-md"
       type="button"
       disabled={isPending}
       onClick={() => startTransition(() => router.refresh())}

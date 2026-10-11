@@ -48,16 +48,16 @@ function PasswordField({
     name === "confirmPassword" ? "নিশ্চিতকরণের পাসওয়ার্ড" : "পাসওয়ার্ড";
 
   return (
-    <div className="form-field">
-      <label htmlFor={id} className="form-label">
+    <div className="grid gap-1.5">
+      <label htmlFor={id} className="text-sm font-medium">
         {label}
       </label>
-      <div className="password-input">
+      <div className="relative">
         <input
           ref={inputRef}
           id={id}
           name={name}
-          className="form-input"
+          className="input w-full h-11 text-base min-[480px]:h-10 min-[480px]:text-sm placeholder:text-[#68796c] pr-11"
           type={visible ? "text" : "password"}
           placeholder={placeholder}
           autoComplete={autoComplete}
@@ -68,7 +68,7 @@ function PasswordField({
         />
         <button
           type="button"
-          className="password-toggle"
+          className="btn btn-ghost btn-square btn-sm absolute top-1/2 right-1 -translate-y-1/2 text-muted hover:bg-soft hover:text-base-content"
           aria-label={`${toggleLabel} ${visible ? "লুকান" : "দেখান"}`}
           aria-controls={id}
           aria-pressed={visible}
@@ -199,7 +199,7 @@ export function AuthForm({ mode, socialProviders }: AuthFormProps) {
   return (
     <>
       <form
-        className="auth-form"
+        className="grid gap-4"
         onSubmit={handleSubmit}
         aria-busy={busy}
         onInvalid={(event) => {
@@ -213,15 +213,15 @@ export function AuthForm({ mode, socialProviders }: AuthFormProps) {
         }}
       >
         {isSignup && (
-          <div className="form-field">
-            <label htmlFor={`${formId}-name`} className="form-label">
+          <div className="grid gap-1.5">
+            <label htmlFor={`${formId}-name`} className="text-sm font-medium">
               নাম
             </label>
             <input
               ref={nameRef}
               id={`${formId}-name`}
               name="name"
-              className="form-input"
+              className="input w-full h-11 text-base min-[480px]:h-10 min-[480px]:text-sm placeholder:text-[#68796c]"
               type="text"
               placeholder="যেমন: রহিম উদ্দিন"
               autoComplete="name"
@@ -231,14 +231,14 @@ export function AuthForm({ mode, socialProviders }: AuthFormProps) {
           </div>
         )}
 
-        <div className="form-field">
-          <label htmlFor={`${formId}-email`} className="form-label">
+        <div className="grid gap-1.5">
+          <label htmlFor={`${formId}-email`} className="text-sm font-medium">
             ইমেইল
           </label>
           <input
             id={`${formId}-email`}
             name="email"
-            className="form-input"
+            className="input w-full h-11 text-base min-[480px]:h-10 min-[480px]:text-sm placeholder:text-[#68796c]"
             type="email"
             placeholder="you@example.com"
             autoComplete="email"
@@ -271,14 +271,14 @@ export function AuthForm({ mode, socialProviders }: AuthFormProps) {
         )}
 
         {formError && (
-          <p className="form-error" role="alert">
+          <p className="text-sm text-error" role="alert">
             {formError}
           </p>
         )}
 
         <button
           type="submit"
-          className="button button-primary auth-submit"
+          className="btn btn-primary btn-block h-11 text-sm min-[480px]:h-10"
           disabled={busy}
         >
           {submitting
@@ -289,9 +289,7 @@ export function AuthForm({ mode, socialProviders }: AuthFormProps) {
         </button>
       </form>
 
-      <div className="auth-divider">
-        <span>অথবা</span>
-      </div>
+      <div className="divider my-5 text-xs text-muted">অথবা</div>
 
       <SocialLogin
         providers={socialProviders}
@@ -299,9 +297,9 @@ export function AuthForm({ mode, socialProviders }: AuthFormProps) {
         onPendingChange={setSocialPending}
       />
 
-      <p className="auth-switch">
+      <p className="mt-5 text-center text-sm">
         {isSignup ? "অ্যাকাউন্ট আছে? " : "অ্যাকাউন্ট নেই? "}
-        <Link href={isSignup ? "/signin" : "/signup"} prefetch={false}>
+        <Link href={isSignup ? "/signin" : "/signup"} prefetch={false} className="link link-primary underline-offset-[3px]">
           {isSignup ? "সাইন ইন করুন" : "সাইন আপ করুন"}
         </Link>
       </p>

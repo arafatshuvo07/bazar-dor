@@ -13,6 +13,18 @@ type NavbarProps = {
   categoriesUnavailable?: boolean;
 };
 
+export function CategoryStatus({ children }: { children: string }) {
+  return (
+    <div className="border-t border-base-300">
+      <div className="mx-auto w-full max-w-6xl px-4">
+        <p className="flex min-h-12 items-center py-2 text-xs text-muted" role="status">
+          {children}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function Navbar({
   categories,
   dateLabel,
@@ -20,36 +32,26 @@ export function Navbar({
   categoriesUnavailable = false,
 }: NavbarProps) {
   return (
-    <header className="site-header">
-      <div className="site-container header-main">
-        <Link href="/" className="brand-link">
-          <span className="brand-icon" aria-hidden="true">
+    <header className="shrink-0 border-b border-base-300 bg-base-100 text-base-content">
+      <div className="navbar mx-auto min-h-[68px] w-full max-w-6xl flex-wrap justify-between gap-3 px-4 py-3 min-[480px]:flex-nowrap min-[480px]:gap-4">
+        <Link href="/" className="inline-flex min-w-0 flex-[1_1_100%] items-center gap-3 min-[480px]:flex-initial">
+          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary text-primary-content" aria-hidden="true">
             <ShoppingCartIcon size={22} weight="regular" />
           </span>
           <span>
-            <span className="brand-name">বাজার দর</span>
-            <time className="brand-date" dateTime={dateTime}>
+            <span className="block text-xl leading-7 font-bold">বাজার দর</span>
+            <time className="block text-xs text-muted" dateTime={dateTime}>
               {dateLabel}
             </time>
           </span>
         </Link>
 
-        <nav className="auth-links" aria-label="অ্যাকাউন্ট">
+        <nav className="ml-auto flex shrink-0 items-center gap-2" aria-label="অ্যাকাউন্ট">
           <AccountMenu />
         </nav>
       </div>
 
-      <Suspense
-        fallback={
-          <div className="category-strip">
-            <div className="site-container">
-              <p className="category-status" role="status">
-                ক্যাটাগরি লোড হচ্ছে…
-              </p>
-            </div>
-          </div>
-        }
-      >
+      <Suspense fallback={<CategoryStatus>ক্যাটাগরি লোড হচ্ছে…</CategoryStatus>}>
         <CategoryNav
           categories={categories}
           unavailable={categoriesUnavailable}

@@ -28,10 +28,10 @@ export default async function CategoryPage({ params }: PageProps<"/category/[slu
 
   if (unavailable) {
     return (
-      <div className="site-container category-page">
-        <section className="catalog-message category-message" aria-labelledby="category-error-title">
-          <h1 id="category-error-title">পণ্যের দাম লোড করা যাচ্ছে না</h1>
-          <p>সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।</p>
+      <div className="mx-auto w-full max-w-6xl px-4 pt-6 pb-12">
+        <section className="rounded-box border border-base-300 bg-base-100 p-6 text-muted" aria-labelledby="category-error-title">
+          <h1 id="category-error-title" className="mb-2 text-2xl font-bold text-base-content">পণ্যের দাম লোড করা যাচ্ছে না</h1>
+          <p className="mb-4">সংযোগে সমস্যা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।</p>
           <RefreshButton />
         </section>
       </div>
@@ -41,15 +41,15 @@ export default async function CategoryPage({ params }: PageProps<"/category/[slu
   if (!category || !products?.length) notFound();
 
   return (
-    <div className="site-container category-page">
-      <header className="category-heading">
-        <span className="category-heading-icon" aria-hidden="true">{category.icon}</span>
+    <div className="mx-auto w-full max-w-6xl px-4 pt-6 pb-12">
+      <header className="flex min-h-[94px] items-center gap-3 rounded-box border border-base-300 bg-base-100 p-5">
+        <span className="shrink-0 text-4xl leading-10" aria-hidden="true">{category.icon}</span>
         <div>
-          <h1>{category.nameBn}</h1>
-          <p>{formatPrice(products.length)}টি পণ্যের আজকের দাম ও পরিবর্তন</p>
+          <h1 className="text-2xl font-bold">{category.nameBn}</h1>
+          <p className="text-sm text-muted">{formatPrice(products.length)}টি পণ্যের আজকের দাম ও পরিবর্তন</p>
         </div>
       </header>
-      <section className="category-catalog" aria-label={`${category.nameBn} পণ্যের তালিকা`}>
+      <section className="mt-6" aria-label={`${category.nameBn} পণ্যের তালিকা`}>
         <CategoryProducts key={category.slug} products={products} />
       </section>
     </div>

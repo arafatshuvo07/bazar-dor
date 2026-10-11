@@ -26,7 +26,7 @@ export function ProfileSignOut() {
   }
 
   return (
-    <button type="button" className="button profile-sign-out" disabled={pending} onClick={signOut}>
+    <button type="button" className="btn btn-outline btn-error ml-auto h-11 shrink-0 border-error/25 text-sm hover:border-error hover:bg-[#fbeded] hover:text-error min-[480px]:ml-0 min-[480px]:h-10" disabled={pending} onClick={signOut}>
       <SignOutIcon size={16} aria-hidden="true" />
       {pending ? "সাইন আউট হচ্ছে…" : "সাইন আউট"}
     </button>

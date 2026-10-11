@@ -3,7 +3,7 @@ import { connection } from "next/server";
 import { getBangladeshDate } from "@/lib/bangladesh-date";
 import { getCategories } from "@/lib/categories";
 import type { Category } from "@/types/category";
-import { Navbar } from "./navbar";
+import { CategoryStatus, Navbar } from "./navbar";
 
 export async function PageHeader() {
   await connection();
@@ -30,21 +30,15 @@ export async function PageHeader() {
 
 export function HeaderSkeleton() {
   return (
-    <header className="site-header" aria-busy="true">
-      <div className="site-container header-main" aria-hidden="true">
-        <div className="header-placeholder">
-          <span className="skeleton-brand" />
-          <span className="skeleton-title" />
+    <header className="shrink-0 border-b border-base-300 bg-base-100" aria-busy="true">
+      <div className="navbar mx-auto min-h-[68px] w-full max-w-6xl flex-wrap justify-between gap-3 px-4 py-3 min-[480px]:flex-nowrap" aria-hidden="true">
+        <div className="inline-flex flex-[1_1_100%] items-center gap-3 min-[480px]:flex-initial">
+          <span className="skeleton size-10 rounded-xl" />
+          <span className="skeleton h-8 w-30" />
         </div>
-        <span className="skeleton-actions" />
+        <span className="skeleton ml-auto h-10 w-36" />
       </div>
-      <div className="category-strip">
-        <div className="site-container">
-          <p className="category-status" role="status">
-            ক্যাটাগরি লোড হচ্ছে…
-          </p>
-        </div>
-      </div>
+      <CategoryStatus>ক্যাটাগরি লোড হচ্ছে…</CategoryStatus>
     </header>
   );
 }

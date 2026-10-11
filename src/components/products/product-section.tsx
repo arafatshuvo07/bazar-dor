@@ -10,27 +10,29 @@ type ProductSectionProps = {
   emptyMessage: string;
 };
 
+export const productGridClass = "grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-3";
+
 export function ProductSection({
   id, title, subtitle, direction, products, emptyMessage,
 }: ProductSectionProps) {
   return (
-    <section id={id} className="product-section" aria-labelledby={`${id}-title`}>
-      <div className="section-heading">
-        <h2 id={`${id}-title`}>
+    <section id={id} className="min-w-0 scroll-mt-6" aria-labelledby={`${id}-title`}>
+      <div className="mb-4">
+        <h2 id={`${id}-title`} className="flex items-center gap-2 text-xl leading-7 font-bold">
           {title}
           {direction && (
-            <span className={`section-direction price-change--${direction}`} aria-hidden="true">
+            <span className={`text-sm ${direction === "up" ? "text-up" : "text-down"}`} aria-hidden="true">
               {direction === "up" ? "▲" : "▼"}
             </span>
           )}
         </h2>
-        {subtitle && <p>{subtitle}</p>}
+        {subtitle && <p className="mt-1 text-sm text-muted">{subtitle}</p>}
       </div>
       {products.length > 0 ? (
-        <div className="product-grid">
+        <div className={productGridClass}>
           {products.map((product) => <ProductCard key={product.id} product={product} />)}
         </div>
-      ) : <p className="catalog-message">{emptyMessage}</p>}
+      ) : <p className="rounded-box border border-base-300 bg-base-100 p-6 text-muted">{emptyMessage}</p>}
     </section>
   );
 }

@@ -89,12 +89,12 @@ export function ProfileUpdateForm({ name, email }: ProfileUpdateFormProps) {
 
   return (
     <form
-      className="profile-update-form"
+      className="grid gap-5"
       onSubmit={handleSubmit}
       aria-busy={pending}
     >
-      <div className="form-field">
-        <label htmlFor={`${formId}-name`} className="form-label">
+      <div className="grid gap-1.5">
+        <label htmlFor={`${formId}-name`} className="text-sm font-medium">
           নাম
         </label>
         <input
@@ -102,7 +102,7 @@ export function ProfileUpdateForm({ name, email }: ProfileUpdateFormProps) {
           id={`${formId}-name`}
           name="name"
           type="text"
-          className="form-input"
+          className="input w-full h-11 text-base min-[480px]:h-10 min-[480px]:text-sm placeholder:text-[#68796c] aria-invalid:input-error"
           placeholder="আপনার নাম লিখুন"
           autoComplete="name"
           value={nameValue}
@@ -120,28 +120,28 @@ export function ProfileUpdateForm({ name, email }: ProfileUpdateFormProps) {
         />
       </div>
 
-      <dl className="form-field profile-readonly-field">
-        <dt className="form-label">ইমেইল</dt>
-        <dd className="profile-readonly-value">{email}</dd>
+      <dl className="grid gap-1.5">
+        <dt className="text-sm font-medium">ইমেইল</dt>
+        <dd className="text-muted [overflow-wrap:anywhere]">{email}</dd>
       </dl>
 
       {formError && (
-        <p id={errorId} className="form-error" role="alert">
+        <p id={errorId} className="text-sm text-error" role="alert">
           {formError}
         </p>
       )}
 
-      <div className="profile-form-actions">
+      <div className="flex flex-col gap-3 min-[480px]:flex-row min-[480px]:flex-wrap">
         <button
           type="submit"
-          className="button button-primary"
+          className="btn btn-primary h-11 w-full min-[480px]:h-10 min-[480px]:w-auto"
           disabled={pending || unchanged}
         >
           {pending ? "আপডেট হচ্ছে…" : "তথ্য আপডেট করুন"}
         </button>
         <Link
           href="/my-profile"
-          className="button button-ghost"
+          className="btn btn-ghost h-11 w-full aria-disabled:cursor-not-allowed aria-disabled:opacity-60 min-[480px]:h-10 min-[480px]:w-auto"
           aria-disabled={pending || undefined}
           tabIndex={pending ? -1 : undefined}
           onClick={(event) => {

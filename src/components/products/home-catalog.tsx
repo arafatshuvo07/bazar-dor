@@ -13,9 +13,9 @@ export async function HomeCatalog() {
     products = await getProducts();
   } catch {
     return (
-      <section id="সব-পণ্য" className="catalog-message catalog-error" aria-labelledby="catalog-error-title">
-        <h2 id="catalog-error-title">পণ্যের দাম লোড করা যাচ্ছে না</h2>
-        <p>কিছুক্ষণ পরে আবার চেষ্টা করুন।</p>
+      <section id="সব-পণ্য" className="mt-10 rounded-box border border-base-300 bg-base-100 p-6 text-muted" aria-labelledby="catalog-error-title">
+        <h2 id="catalog-error-title" className="mb-2 text-xl font-bold text-base-content">পণ্যের দাম লোড করা যাচ্ছে না</h2>
+        <p className="mb-4">কিছুক্ষণ পরে আবার চেষ্টা করুন।</p>
         <RefreshButton />
       </section>
     );
@@ -24,7 +24,7 @@ export async function HomeCatalog() {
   const { risers, fallers } = getTopMovers(products);
 
   return (
-    <div className="home-catalog">
+    <div className="mt-8 grid gap-8 md:mt-10 md:gap-10">
       <ProductSection
         id="দাম-বেড়েছে"
         title="আজ দাম বেড়েছে"

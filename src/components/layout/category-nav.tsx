@@ -17,23 +17,25 @@ export function CategoryNav({
   const pathname = usePathname();
 
   return (
-    <nav className="category-strip" aria-label="পণ্যের ক্যাটাগরি">
-      <div className="site-container">
+    <nav className="border-t border-base-300" aria-label="পণ্যের ক্যাটাগরি">
+      <div className="mx-auto w-full max-w-6xl px-4">
         {unavailable ? (
-          <p className="category-status" role="status">
+          <p className="flex min-h-12 items-center py-2 text-xs text-muted" role="status">
             ক্যাটাগরি এখন লোড করা যাচ্ছে না। পরে আবার চেষ্টা করুন।
           </p>
         ) : (
-          <ul className="category-list">
+          <ul className="flex min-h-12 items-center gap-1 overflow-x-auto py-2 [scrollbar-color:#bacbbb_transparent] [scrollbar-width:thin]">
             {categories.map((category) => {
               const href = `/category/${encodeURIComponent(category.slug)}`;
               const isActive = pathname === href;
 
               return (
-                <li key={category.id}>
+                <li key={category.id} className="shrink-0">
                   <Link
                     href={href}
-                    className={`category-link${isActive ? " is-active" : ""}`}
+                    className={`btn btn-sm h-10 min-h-10 gap-1.5 px-3 text-xs md:h-8 md:min-h-8 ${
+                      isActive ? "btn-primary" : "btn-ghost"
+                    }`}
                     aria-current={isActive ? "page" : undefined}
                     prefetch={false}
                   >

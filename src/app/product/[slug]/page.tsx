@@ -18,11 +18,13 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
   if (!product) notFound();
 
   return (
-    <div className="site-container product-detail-page">
-      <nav className="product-breadcrumb" aria-label="পেজের অবস্থান">
-        <Link href="/">হোম</Link><span aria-hidden="true">/</span>
-        <Link href={`/category/${encodeURIComponent(product.category)}`}>{product.categoryNameBn}</Link>
-        <span aria-hidden="true">/</span><span aria-current="page">{product.nameBn}</span>
+    <div className="mx-auto w-full max-w-6xl px-4 pt-6 pb-12">
+      <nav className="breadcrumbs mb-4 py-0 text-sm text-muted" aria-label="পেজের অবস্থান">
+        <ul>
+          <li><Link href="/" className="hover:text-primary">হোম</Link></li>
+          <li><Link href={`/category/${encodeURIComponent(product.category)}`} className="hover:text-primary">{product.categoryNameBn}</Link></li>
+          <li><span aria-current="page">{product.nameBn}</span></li>
+        </ul>
       </nav>
       <ProductSummary product={product} />
       <ProductMarketPrices product={product} />

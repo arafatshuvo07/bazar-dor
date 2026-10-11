@@ -76,10 +76,10 @@ export function SocialLogin({
 
   return (
     <div>
-      <div className="social-login">
+      <div className="grid grid-cols-1 gap-2 min-[360px]:grid-cols-2">
         <button
           type="button"
-          className="social-login-button"
+          className="btn btn-outline h-11 min-w-0 gap-1.5 border-[#b8c7bc] px-2 text-xs font-normal hover:bg-soft min-[480px]:h-10"
           disabled={disabled || pendingProvider !== null || !providers.google}
           aria-busy={pendingProvider === "google"}
           aria-describedby={!providers.google ? statusId : undefined}
@@ -94,7 +94,7 @@ export function SocialLogin({
         </button>
         <button
           type="button"
-          className="social-login-button"
+          className="btn btn-outline h-11 min-w-0 gap-1.5 border-[#b8c7bc] px-2 text-xs font-normal hover:bg-soft min-[480px]:h-10"
           disabled={disabled || pendingProvider !== null || !providers.github}
           aria-busy={pendingProvider === "github"}
           aria-describedby={!providers.github ? statusId : undefined}
@@ -110,7 +110,7 @@ export function SocialLogin({
       </div>
 
       {unavailableProviders.length > 0 && (
-        <p id={statusId} className="social-login-status">
+        <p id={statusId} className="mt-3 text-xs leading-[18px] text-muted">
           {unavailableProviders.join(" ও ")} দিয়ে সাইন ইন এখন চালু নেই। ইমেইল
           দিয়ে চালিয়ে যান।
         </p>

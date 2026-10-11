@@ -29,8 +29,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="bn-BD"
       className={`${hindSiliguri.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <a href="#main-content" className="skip-link">
+      <body className="flex min-h-dvh flex-col bg-base-200 font-sans text-base leading-normal text-base-content">
+        <a href="#main-content" className="btn btn-neutral btn-sm absolute top-2 left-4 z-50 -translate-y-[150%] focus:translate-y-0">
           মূল বিষয়বস্তুতে যান
         </a>
         <Suspense fallback={<HeaderSkeleton />}>
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Suspense fallback={<TickerSkeleton />}>
           <LivePriceTicker />
         </Suspense>
-        <main id="main-content" className="site-main" tabIndex={-1}>
+        <main id="main-content" className="min-w-0 flex-1" tabIndex={-1}>
           {children}
         </main>
         <Footer />

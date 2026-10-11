@@ -21,7 +21,7 @@ Track daily essential prices and compare market prices across Bangladesh. Bazar 
 
 ## Technologies
 
-Next.js App Router, React, TypeScript, Tailwind CSS, Better Auth, PostgreSQL/SQLite, Radix UI, React Hot Toast and Phosphor Icons. Bengali typography uses Hind Siliguri.
+Next.js App Router, React, TypeScript, Tailwind CSS with the daisyUI component library, Better Auth, PostgreSQL/SQLite, Radix UI (accessible account menu), React Hot Toast and Phosphor Icons. All styling uses Tailwind utilities and daisyUI components (`btn`, `card`, `badge`, `input`, `select`, `table`, `stat`, `skeleton`, `breadcrumbs`, `divider`) with a custom `bazardor` theme. Bengali typography uses Hind Siliguri.
 
 ## Local setup
 
