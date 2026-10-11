@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
+import { Suspense } from "react";
+import { Footer } from "@/components/layout/footer";
+import { HeaderSkeleton, PageHeader } from "@/components/layout/page-header";
 import "./globals.css";
 
 const hindSiliguri = Hind_Siliguri({
@@ -24,7 +27,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="bn-BD"
       className={`${hindSiliguri.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <a href="#main-content" className="skip-link">
+          মূল বিষয়বস্তুতে যান
+        </a>
+        <Suspense fallback={<HeaderSkeleton />}>
+          <PageHeader />
+        </Suspense>
+        <main id="main-content" className="site-main" tabIndex={-1}>
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }

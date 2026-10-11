@@ -21,6 +21,10 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 ## Main requirements
 
 - [ ] Navbar: logo, বাংলা date, active category, auth buttons ও profile menu
+- [x] Design foundation: Hind Siliguri, reference palette ও shared spacing
+- [x] Signed-out Navbar: logo, ঢাকা সময়ের বাংলা date, API category ও account links
+- [x] Category navigation: pathname অনুযায়ী active link, mobile scrolling ও keyboard focus
+- [ ] Signed-in Navbar: session, profile menu ও logout
 - [ ] Infinite price ticker: emoji, নাম, দাম, unit ও পরিবর্তন
 - [ ] Hero: heading, subtitle, image, একই পেজের সব-পণ্য section-এ anchor CTA
 - [ ] Home: top 6 risers, top 6 fallers ও সব product cards
@@ -32,10 +36,12 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 - [ ] `/signup`: name/email/password ও design অনুযায়ী confirm-password
 - [ ] Email signup শেষে signin; signin ও social login শেষে home
 - [ ] Auth, logout, validation ও protected redirect toast
-- [ ] Footer: reference design ও price disclaimer
+- [x] Footer: reference design ও price disclaimer
 - [ ] Unknown/invalid route-এর friendly 404 ও home CTA
 - [ ] Mobile, tablet ও desktop responsive layout
 - [ ] Home/category fetching-এর সময় skeleton
+
+Shared Navbar ও Footer mobile, tablet ও desktop-এ যাচাই করা হয়েছে। সম্পূর্ণ application-এর responsive check বাকি page তৈরি হওয়ার পরে করা হবে।
 
 ## Challenge
 

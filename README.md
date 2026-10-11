@@ -6,7 +6,9 @@ Assignment: [B14-A7-Bazar-Dor](https://github.com/ProgrammingHero1/B14-A7-Bazar-
 
 ## বর্তমান অবস্থা
 
-প্রথম ধাপ: project setup, dependencies এবং folder structure তৈরি হয়েছে। Application features পরবর্তী ধাপে তৈরি হবে। Home page এখন Next.js starter page।
+Project setup-এর পরে shared layout তৈরি হয়েছে: Hind Siliguri font, reference-এর রং ও spacing, responsive Navbar এবং Footer। Navbar-এ ঢাকা সময় অনুযায়ী বাংলা তারিখ, API থেকে category এবং সাইন ইন/সাইন আপ links আছে। ছোট screen-এ category তালিকা পাশাপাশি scroll করা যায়।
+
+Home-এর product sections, category pages, authentication ও profile পরবর্তী ধাপে তৈরি হবে। এখন Home-এ শুধু সংক্ষিপ্ত বাংলা পরিচিতি আছে; account এবং category links-এর গন্তব্য page এখনো তৈরি হয়নি।
 
 ## প্রযুক্তি
 
@@ -31,7 +33,7 @@ npm ci
 npm run dev
 ```
 
-Local address: http://localhost:3000
+Default local address: http://localhost:3000। Port ব্যবহৃত থাকলে terminal-এ দেখানো address ব্যবহার করুন।
 
 ```bash
 npm run lint
@@ -74,6 +76,8 @@ Primary: `https://openapi.programming-hero.com/api/bazardor`
 Alternative: `https://api.abcz.workers.dev/api/bazardor`
 
 Endpoints: `/products`, `/products?category=chal`, `/products/1`, `/categories`, `/categories/chal`।
+
+Navbar-এর category data এক ঘণ্টা cache করা হয়। Primary API ব্যর্থ হলে alternative API থেকে চেষ্টা করা হয়; কোনো endpoint থেকেই data না এলে Navbar-এ বাংলায় error message দেখায়।
 
 ## Development
 
