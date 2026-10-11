@@ -846,3 +846,72 @@ button:disabled, input:disabled { opacity: .6; cursor: not-allowed; }
   .profile-form-actions { flex-direction: column; }
   .profile-form-actions .button { width: 100%; min-height: 44px; }
 }
+
+.button-primary {
+  background: var(--primary-hover);
+}
+
+.button-primary:hover:not(:disabled) {
+  border-color: #036f32;
+  background: #036f32;
+}
+
+.route-fallback-page {
+  padding-block: 40px 48px;
+}
+
+.route-fallback-card {
+  max-width: 640px;
+  margin-inline: auto;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  overflow-wrap: anywhere;
+}
+
+.route-fallback-card h1 {
+  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.route-fallback-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.route-fallback-card .route-fallback-code {
+  margin-bottom: 8px;
+  color: var(--primary-hover);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+.route-fallback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.route-fallback-actions .button {
+  min-height: 44px;
+}
+
+.global-error-body {
+  display: grid;
+  min-height: 100dvh;
+  align-content: center;
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+@media (max-width: 479px) {
+  .route-fallback-page { padding-block: 24px 40px; }
+  .route-fallback-card { padding: 24px 20px; }
+  .route-fallback-actions { flex-direction: column; }
+  .route-fallback-actions .button { width: 100%; white-space: normal; }
+}
