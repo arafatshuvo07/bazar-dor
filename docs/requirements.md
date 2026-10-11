@@ -60,11 +60,11 @@ Shared layout, ticker, Hero, Home ও Category cards 320, 390, 768 ও 1440px-�
 
 - [x] অন্তত ৮টি meaningful commits
 - [x] Deployment ও Live website link: https://bazar-dor-arafatshuvo07.vercel.app
-- [ ] Home, category, details, signin/signup, profile ও protected route checks
+- [x] Home, category, details, signin/signup, profile ও protected route checks
 - [x] Dynamic URL reload, API, assets, mobile ও console checks
-
-Live site-এ Home, Category, sorting, guest-এর protected redirect ও toast, 404, direct reload, assets, 375px mobile ও console যাচাই করা হয়েছে। GitHub OAuth authorization URL সঠিক callback দেখায়। Email ও GitHub দিয়ে আসল sign up/sign in, Product Details, Profile ও update live site-এ এখনো নিজে যাচাই করতে হবে।
 - [x] GitHub repository link
+
+Live site-এ Home, Category, sorting, guest-এর protected redirect ও toast, 404, direct reload, assets, 375px mobile ও console যাচাই করা হয়েছে। GitHub দিয়ে sign in শেষে Home, Product Details ও reload, My Profile, নাম update এবং sign out live site-এ যাচাই করা হয়েছে। Email sign up/sign in local build-এ যাচাই করা হয়েছে। Tailwind CSS ও daisyUI-তে রূপান্তরের পরে live site আবার যাচাই করা হয়েছে।
 
 Email verification ও forgot password এই assignment-এর অংশ নয়।
 
