@@ -31,7 +31,7 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 - [x] Cards: emoji, নাম, unit, বাংলায় দাম ও change badge
 - [x] Category: API filter, heading, icon, skeleton ও empty state
 - [x] Protected `/product/[slug]`: summary, category, unit
-- [ ] Details: minimum, maximum, average ও বাজারভিত্তিক দাম
+- [x] Details: minimum, maximum, average ও বাজারভিত্তিক দাম
 - [x] `/signin`: email/password login ও Home redirect
 - [x] Google/GitHub OAuth wiring ও callback error toast
 - [ ] Google/GitHub credentials ও আসল social login যাচাই
@@ -45,8 +45,9 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 - [ ] Mobile, tablet ও desktop responsive layout
 - [x] Home fetching-এর সময় skeleton; API failure ও empty data-এর আলাদা state
 - [x] Category fetching-এর সময় skeleton
+- [x] Product details: skeleton, retry, invalid slug ও empty markets
 
-Shared layout, ticker, Hero, Home ও Category cards 320, 390, 768 ও 1440px-এ যাচাই করা হয়েছে। আটটি category URL সরাসরি load, invalid category, keyboard sorting ও category বদলালে default sorting যাচাই করা হয়েছে। Sign In/Sign Up-ও 320, 390, 768 ও 1440px-এ যাচাই করা হয়েছে। সম্পূর্ণ application-এর responsive check বাকি page তৈরি হওয়ার পরে করা হবে।
+Shared layout, ticker, Hero, Home ও Category cards 320, 390, 768 ও 1440px-এ যাচাই করা হয়েছে। আটটি category URL সরাসরি load, invalid category, keyboard sorting ও category বদলালে default sorting যাচাই করা হয়েছে। Sign In/Sign Up ও Product Details-ও 320, 390, 768 ও 1440px-এ যাচাই করা হয়েছে। সম্পূর্ণ application-এর responsive check বাকি page তৈরি হওয়ার পরে করা হবে।
 
 ## Challenge
 
@@ -71,4 +72,4 @@ Email verification ও forgot password এই assignment-এর অংশ নয়
 - Category slug API থেকে নিতে হবে; ডিম-দুধের slug `dim-dui`।
 - Sorting numeric price দিয়ে হবে; display-তে বাংলা সংখ্যা থাকবে।
 - API failure ও empty category আলাদা state হিসেবে handle করতে হবে।
-- Market average-এর calculation implementation-এর সময় নির্ধারণ করতে হবে।
+- Market average: প্রতিটি বাজারের `(min + max) / 2`; summary average হলো সব বাজারের midpoint-এর গড়।

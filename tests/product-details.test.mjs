@@ -62,10 +62,44 @@ test("protected page validates the session before loading any product", async ()
     "@/lib/auth": { auth: { api: { getSession: async () => session } } },
     "@/lib/products": { getProductBySlug: async () => { productCalls++; return product; } },
     "@/components/products/product-summary": { ProductSummary: () => null },
+    "@/components/products/market-prices": { ProductMarketPrices: () => null },
   });
   await assert.rejects(page({ params: Promise.resolve({ slug: product.slug }) }), /REDIRECT:\/signin\?reason=login-required/);
   assert.equal(productCalls, 0);
   session = { user: { id: "signed-in-user" } };
   assert(await page({ params: Promise.resolve({ slug: product.slug }) }));
   assert.equal(productCalls, 1);
+});
+
+test("market summary uses all market ranges, not the product headline price", () => {
+  const { getMarketSummary } = loadModule("src/lib/market-prices.ts", {});
+  const markets = [
+    { market: "ক", division: "ঢাকা", min: 80, max: 100 },
+    { market: "খ", division: "ঢাকা", min: 100, max: 130 },
+    { market: "গ", division: "চট্টগ্রাম", min: 90, max: 110 },
+  ];
+  const result = getMarketSummary(markets);
+  assert.equal(result.minimum, 80);
+  assert.equal(result.maximum, 130);
+  assert.equal(result.average, (90 + 115 + 100) / 3);
+  assert.equal(getMarketSummary([]), null);
+  assert.equal(getMarketSummary([{ ...markets[0], min: 0, max: 0 }]).average, 0);
+});
+
+test("market table renders every market, correct units and an honest empty state", () => {
+  const helpers = loadModule("src/lib/market-prices.ts", {});
+  const formatters = loadModule("src/lib/product-format.ts", {});
+  const { ProductMarketPrices } = loadModule("src/components/products/market-prices.tsx", {
+    "@/lib/market-prices": helpers, "@/lib/product-format": formatters,
+  });
+  const { renderToStaticMarkup } = require("react-dom/server");
+  const html = renderToStaticMarkup(ProductMarketPrices({ product: { ...product, unit: "litre" } }));
+  assert(html.includes("প্রতি লিটার"));
+  assert(html.includes("প্রথম বাজার"));
+  assert(html.includes('scope="row"'));
+  assert(html.includes("১০০"));
+  const empty = renderToStaticMarkup(ProductMarketPrices({ product: { ...product, markets: [] } }));
+  assert(empty.includes("বাজারভিত্তিক দাম এখন পাওয়া যাচ্ছে না"));
+  assert(!empty.includes("<table"));
+  assert(!empty.includes("NaN") && !empty.includes("Infinity"));
 });

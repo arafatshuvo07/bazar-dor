@@ -5,6 +5,7 @@ import { notFound, redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { getProductBySlug } from "@/lib/products";
 import { ProductSummary } from "@/components/products/product-summary";
+import { ProductMarketPrices } from "@/components/products/market-prices";
 
 export const metadata: Metadata = { title: "পণ্যের বিস্তারিত দাম" };
 
@@ -24,6 +25,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
         <span aria-hidden="true">/</span><span aria-current="page">{product.nameBn}</span>
       </nav>
       <ProductSummary product={product} />
+      <ProductMarketPrices product={product} />
     </div>
   );
 }

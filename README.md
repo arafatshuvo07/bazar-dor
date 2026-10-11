@@ -10,7 +10,7 @@ Project setup-এর পরে shared layout তৈরি হয়েছে: Hind 
 
 Home page-এ supplied design-এর hero, সবচেয়ে বেশি দাম বাড়া/কমা পণ্য এবং সব পণ্যের তালিকা তৈরি হয়েছে। Navbar-এর নিচে API data দিয়ে চলমান price ticker আছে।
 
-Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Email/password authentication, Sign In/Sign Up, session অনুযায়ী Navbar ও logout তৈরি হয়েছে। Google/GitHub OAuth wiring আছে; provider credentials যোগ করা ও আসল social login যাচাই বাকি। Protected product route-এ server session যাচাই, product summary ও category link আছে। বাজারভিত্তিক বিস্তারিত ও My Profile-এর কাজ বাকি।
+Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Email/password authentication, Sign In/Sign Up, session অনুযায়ী Navbar ও logout তৈরি হয়েছে। Google/GitHub OAuth wiring আছে; provider credentials যোগ করা ও আসল social login যাচাই বাকি। Protected product details-এ server session যাচাই, product summary, category link, বাজারভিত্তিক table এবং সর্বনিম্ন/সর্বাধিক/গড় দাম আছে। My Profile-এর কাজ বাকি।
 
 ## প্রযুক্তি
 
@@ -28,10 +28,11 @@ Next.js App Router, React, TypeScript, Tailwind CSS, Radix UI, Better Auth, Reac
 8. Category page-এ default, কম থেকে বেশি ও বেশি থেকে কম দামে সাজানো।
 9. Better Auth email signup/login, persistent session ও logout।
 10. Form validation, password visibility, বাংলা toast এবং account dropdown।
+11. Protected product details, বাজারের দাম ও সর্বনিম্ন/সর্বাধিক/গড় summary।
 
 ## পরবর্তী কাজ
 
-Google/GitHub credentials ও end-to-end social login verification, বাজারভিত্তিক product details এবং My Profile থেকে নাম update।
+Google/GitHub credentials ও end-to-end social login verification, My Profile থেকে নাম update ও deployment।
 
 ## চালানোর নিয়ম
 
@@ -120,3 +121,9 @@ Email signup-এর পরে Sign In, login-এর পরে Home-এ যাও
 `npm run test:auth` password hashing, session cookie, ভুল password, logout revocation, origin checking এবং দুই provider-এর authorize URL যাচাই করে। Browser-এ signup, password mismatch, login, reload-এ session এবং logout যাচাই করা হয়েছে। Provider authorize URL পরীক্ষা আসল Google/GitHub account দিয়ে login পরীক্ষার বিকল্প নয়।
 
 Product URL-এ session যাচাইয়ের পরে slug থেকে numeric ID resolve করে `/products/{id}` ব্যবহার করা হয়। অজানা product-এ friendly 404; সাময়িক সমস্যায় retry দেখায়। Signed-out user toast-সহ Sign In-এ যায়; সফল login-এর গন্তব্য Home। `npm run test:products` দিয়ে data lookup ও route guard যাচাই করা যায়।
+
+## বাজারভিত্তিক হিসাব
+
+সর্বনিম্ন দাম সব বাজারের `min`-এর সর্বনিম্ন মান; সর্বাধিক দাম সব `max`-এর সর্বোচ্চ মান। প্রতিটি বাজারের গড় `(min + max) / 2`; summary-তে এই গড়গুলোর arithmetic mean দেখানো হয়। Display-তে সর্বোচ্চ দুই decimal ব্যবহার করা হয়। বাজারের data ফাঁকা থাকলে দাম বানিয়ে দেখানো হয় না।
+
+Product details-এ 320, 390, 768 ও 1440px layout, keyboard table scrolling, direct URL reload, invalid slug, guest/forged/revoked session এবং logout-এর পর Back navigation যাচাই করা হয়েছে। Profile page, hosted database/deployment এবং credential-সহ social login যাচাই বাকি।
