@@ -25,10 +25,10 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 - [x] Signed-out Navbar: logo, ঢাকা সময়ের বাংলা date, API category ও account links
 - [x] Category navigation: pathname অনুযায়ী active link, mobile scrolling ও keyboard focus
 - [ ] Signed-in Navbar: session, profile menu ও logout
-- [ ] Infinite price ticker: emoji, নাম, দাম, unit ও পরিবর্তন
-- [ ] Hero: heading, subtitle, image, একই পেজের সব-পণ্য section-এ anchor CTA
-- [ ] Home: top 6 risers, top 6 fallers ও সব product cards
-- [ ] Cards: emoji, নাম, unit, বাংলায় দাম ও change badge
+- [x] Infinite price ticker: emoji, নাম, দাম, unit ও পরিবর্তন; pause ও reduced-motion support
+- [x] Hero: heading, subtitle, image, একই পেজের সব-পণ্য section-এ anchor CTA
+- [x] Home: top 6 risers, top 6 fallers ও সব product cards
+- [x] Cards: emoji, নাম, unit, বাংলায় দাম ও change badge
 - [ ] Category: API filter, heading, icon, skeleton ও empty state
 - [ ] Protected `/product/[slug]`: summary, category, unit
 - [ ] Details: minimum, maximum, average ও বাজারভিত্তিক দাম
@@ -39,9 +39,10 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 - [x] Footer: reference design ও price disclaimer
 - [ ] Unknown/invalid route-এর friendly 404 ও home CTA
 - [ ] Mobile, tablet ও desktop responsive layout
-- [ ] Home/category fetching-এর সময় skeleton
+- [x] Home fetching-এর সময় skeleton; API failure ও empty data-এর আলাদা state
+- [ ] Category fetching-এর সময় skeleton
 
-Shared Navbar ও Footer mobile, tablet ও desktop-এ যাচাই করা হয়েছে। সম্পূর্ণ application-এর responsive check বাকি page তৈরি হওয়ার পরে করা হবে।
+Shared layout, ticker, Hero ও Home cards 320, 390, 768 ও 1440px-এ যাচাই করা হয়েছে। সম্পূর্ণ application-এর responsive check বাকি page তৈরি হওয়ার পরে করা হবে।
 
 ## Challenge
 

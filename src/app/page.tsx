@@ -1,8 +1,17 @@
+import { Suspense } from "react";
+import { Hero, HeroSkeleton } from "@/components/layout/hero";
+import { CatalogSkeleton } from "@/components/products/catalog-skeleton";
+import { HomeCatalog } from "@/components/products/home-catalog";
+
 export default function Home() {
   return (
-    <section className="site-container home-intro" aria-labelledby="home-title">
-      <h1 id="home-title">বাজার দর</h1>
-      <p>প্রয়োজনীয় পণ্যের দাম এক নজরে।</p>
-    </section>
+    <div className="site-container home-page">
+      <Suspense fallback={<HeroSkeleton />}>
+        <Hero />
+      </Suspense>
+      <Suspense fallback={<CatalogSkeleton />}>
+        <HomeCatalog />
+      </Suspense>
+    </div>
   );
 }

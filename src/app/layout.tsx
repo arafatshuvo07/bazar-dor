@@ -3,6 +3,7 @@ import { Hind_Siliguri } from "next/font/google";
 import { Suspense } from "react";
 import { Footer } from "@/components/layout/footer";
 import { HeaderSkeleton, PageHeader } from "@/components/layout/page-header";
+import { LivePriceTicker, TickerSkeleton } from "@/components/layout/live-price-ticker";
 import "./globals.css";
 
 const hindSiliguri = Hind_Siliguri({
@@ -33,6 +34,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <Suspense fallback={<HeaderSkeleton />}>
           <PageHeader />
+        </Suspense>
+        <Suspense fallback={<TickerSkeleton />}>
+          <LivePriceTicker />
         </Suspense>
         <main id="main-content" className="site-main" tabIndex={-1}>
           {children}
