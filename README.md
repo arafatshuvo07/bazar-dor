@@ -1,7 +1,8 @@
-# Bazar Dor
+# বাজার দর (Bazar Dor)
 
 Track daily essential prices and compare market prices across Bangladesh. Bazar Dor brings current prices, daily changes, category browsing and market comparisons into one Bengali interface.
 
+- [Live website](https://bazar-dor-arafatshuvo07.vercel.app)
 - [GitHub repository](https://github.com/arafatshuvo07/bazar-dor)
 - [Assignment requirements and design resources](https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor)
 
