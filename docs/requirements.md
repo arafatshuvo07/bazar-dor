@@ -42,11 +42,11 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 - [x] Home fetching-এর সময় skeleton; API failure ও empty data-এর আলাদা state
 - [x] Category fetching-এর সময় skeleton
 
-Shared layout, ticker, Hero ও Home cards 320, 390, 768 ও 1440px-এ যাচাই করা হয়েছে। সম্পূর্ণ application-এর responsive check বাকি page তৈরি হওয়ার পরে করা হবে।
+Shared layout, ticker, Hero, Home ও Category cards 320, 390, 768 ও 1440px-এ যাচাই করা হয়েছে। আটটি category URL সরাসরি load, invalid category, keyboard sorting ও category বদলালে default sorting যাচাই করা হয়েছে। সম্পূর্ণ application-এর responsive check বাকি page তৈরি হওয়ার পরে করা হবে।
 
 ## Challenge
 
-- [ ] Default, low-to-high ও high-to-low numeric sorting
+- [x] Default, low-to-high ও high-to-low numeric sorting
 - [ ] My Profile থেকে আলাদা update route-এ নাম পরিবর্তন
 - [ ] Better Auth `updateUser` দিয়ে নাম persist
 - [ ] README: নাম, description, technologies, অন্তত ৫টি features

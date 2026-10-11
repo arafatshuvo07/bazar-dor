@@ -25,10 +25,11 @@ Next.js App Router, React, TypeScript, Tailwind CSS, Radix UI, Better Auth, Reac
 5. Hero থেকে একই পেজের সব পণ্যের তালিকায় যাওয়ার button।
 6. Home-এর loading skeleton, empty state এবং error হলে retry।
 7. Dynamic category route, API filtering ও loading skeleton।
+8. Category page-এ default, কম থেকে বেশি ও বেশি থেকে কম দামে সাজানো।
 
 ## পরবর্তী কাজ
 
-Category numeric sorting, Better Auth দিয়ে email/password ও social login, protected product details এবং My Profile থেকে নাম update।
+Better Auth দিয়ে email/password ও social login, protected product details এবং My Profile থেকে নাম update।
 
 ## চালানোর নিয়ম
 
@@ -84,6 +85,8 @@ Alternative: `https://api.abcz.workers.dev/api/bazardor`
 Endpoints: `/products`, `/products?category=chal`, `/products/1`, `/categories`, `/categories/chal`।
 
 Navbar-এর category data এক ঘণ্টা cache করা হয়। Primary API ব্যর্থ হলে alternative API থেকে চেষ্টা করা হয়; কোনো endpoint থেকেই data না এলে Navbar-এ বাংলায় error message দেখায়।
+
+Category page-এ `/products?category=slug` থেকে data আসে। Sort control সংখ্যাগত দাম দিয়ে সাজায়; ডিফল্টে API-এর মূল ক্রম ফিরে আসে এবং category বদলালে sorting reset হয়।
 
 Product data পাঁচ মিনিট cache করা হয়। Home ও ticker একই request-এর data ব্যবহার করে। দাম কমার শতাংশ API-তে negative হলেও display-তে `▼` চিহ্নের পরে absolute value দেখায়।
 

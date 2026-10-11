@@ -8,7 +8,10 @@ export default function CategoryLoading() {
         <span className="skeleton-emoji" />
         <span className="skeleton-copy" />
       </div>
-      <div className="category-catalog"><SkeletonCards count={6} /></div>
+      <div className="category-catalog">
+        <div className="product-sort card-skeleton" aria-hidden="true"><span className="skeleton-copy" /></div>
+        <SkeletonCards count={6} />
+      </div>
     </div>
   );
 }

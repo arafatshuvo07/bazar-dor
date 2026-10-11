@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
-import { ProductCard } from "@/components/products/product-card";
+import { CategoryProducts } from "@/components/products/category-products";
 import { RefreshButton } from "@/components/ui/refresh-button";
 import { getCategories } from "@/lib/categories";
 import { formatPrice } from "@/lib/product-format";
@@ -50,10 +50,7 @@ export default async function CategoryPage({ params }: PageProps<"/category/[slu
         </div>
       </header>
       <section className="category-catalog" aria-label={`${category.nameBn} পণ্যের তালিকা`}>
-        <p className="category-count">মোট {formatPrice(products.length)}টি পণ্য দেখানো হচ্ছে</p>
-        <div className="product-grid">
-          {products.map((product) => <ProductCard key={product.id} product={product} />)}
-        </div>
+        <CategoryProducts key={category.slug} products={products} />
       </section>
     </div>
   );
