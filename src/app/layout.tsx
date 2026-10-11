@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Footer } from "@/components/layout/footer";
 import { HeaderSkeleton, PageHeader } from "@/components/layout/page-header";
 import { LivePriceTicker, TickerSkeleton } from "@/components/layout/live-price-ticker";
+import { AuthNotifications, ToastProvider } from "@/providers/auth-notifications";
 import "./globals.css";
 
 const hindSiliguri = Hind_Siliguri({
@@ -42,6 +43,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
+        <ToastProvider />
+        <Suspense fallback={null}><AuthNotifications /></Suspense>
       </body>
     </html>
   );

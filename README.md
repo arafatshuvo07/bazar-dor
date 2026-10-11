@@ -10,7 +10,7 @@ Project setup-এর পরে shared layout তৈরি হয়েছে: Hind 
 
 Home page-এ supplied design-এর hero, সবচেয়ে বেশি দাম বাড়া/কমা পণ্য এবং সব পণ্যের তালিকা তৈরি হয়েছে। Navbar-এর নিচে API data দিয়ে চলমান price ticker আছে।
 
-Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Authentication, protected product details ও profile পরবর্তী ধাপে তৈরি হবে। Account ও product card links-এর গন্তব্য page এখনো তৈরি হয়নি।
+Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Email/password authentication, Sign In/Sign Up, session অনুযায়ী Navbar ও logout তৈরি হয়েছে। Google/GitHub OAuth wiring আছে; provider credentials যোগ করা ও আসল social login যাচাই বাকি। Protected product details ও profile পরবর্তী ধাপে তৈরি হবে; product ও profile links-এর গন্তব্য page এখনো তৈরি হয়নি।
 
 ## প্রযুক্তি
 
@@ -26,10 +26,12 @@ Next.js App Router, React, TypeScript, Tailwind CSS, Radix UI, Better Auth, Reac
 6. Home-এর loading skeleton, empty state এবং error হলে retry।
 7. Dynamic category route, API filtering ও loading skeleton।
 8. Category page-এ default, কম থেকে বেশি ও বেশি থেকে কম দামে সাজানো।
+9. Better Auth email signup/login, persistent session ও logout।
+10. Form validation, password visibility, বাংলা toast এবং account dropdown।
 
 ## পরবর্তী কাজ
 
-Better Auth দিয়ে email/password ও social login, protected product details এবং My Profile থেকে নাম update।
+Google/GitHub credentials ও end-to-end social login verification, protected product details এবং My Profile থেকে নাম update।
 
 ## চালানোর নিয়ম
 
@@ -112,3 +114,7 @@ SQLite database `DATABASE_PATH`-এ স্থায়ীভাবে সংর�
 Google OAuth app-এর redirect URI: `<BETTER_AUTH_URL>/api/auth/callback/google`। GitHub OAuth app-এর callback: `<BETTER_AUTH_URL>/api/auth/callback/github`। নিজস্ব provider app-এর client ID ও secret `.env.local`-এর সংশ্লিষ্ট চারটি variable-এ বসাতে হবে। Credentials না থাকলে সংশ্লিষ্ট social button বন্ধ থাকে।
 
 বর্তমান SQLite setup local বা persistent disk-সহ Node hosting-এর জন্য। Vercel/Netlify-এর ephemeral filesystem-এ এই database deploy করা যাবে না; deployment ধাপে persistent hosted database যুক্ত করতে হবে।
+
+Email signup-এর পরে Sign In, login-এর পরে Home-এ যাওয়া হয়। Better Auth-এর `autoSignIn: false` duplicate email-এর ক্ষেত্রেও একই signup response দেয়; UI কোনো নতুন account তৈরি হওয়ার মিথ্যা নিশ্চয়তা দেয় না।
+
+`npm run test:auth` password hashing, session cookie, ভুল password, logout revocation, origin checking এবং দুই provider-এর authorize URL যাচাই করে। Browser-এ signup, password mismatch, login, reload-এ session এবং logout যাচাই করা হয়েছে। Provider authorize URL পরীক্ষা আসল Google/GitHub account দিয়ে login পরীক্ষার বিকল্প নয়।

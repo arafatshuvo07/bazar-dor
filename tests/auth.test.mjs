@@ -11,6 +11,10 @@ test("email authentication persists users and revokes sessions", async (t) => {
   process.env.DATABASE_PATH = join(directory, "test.sqlite");
   process.env.BETTER_AUTH_SECRET = randomBytes(48).toString("base64url");
   process.env.BETTER_AUTH_URL = "http://localhost:3001";
+  process.env.GOOGLE_CLIENT_ID = "test-google-client";
+  process.env.GOOGLE_CLIENT_SECRET = "test-google-secret";
+  process.env.GITHUB_CLIENT_ID = "test-github-client";
+  process.env.GITHUB_CLIENT_SECRET = "test-github-secret";
   const { auth, authDatabase } = await import("../src/lib/auth.ts");
   t.after(async () => { authDatabase.close(); await rm(directory, { recursive: true }); });
   await (await getMigrations(auth.options)).runMigrations();
@@ -50,5 +54,15 @@ test("email authentication persists users and revokes sessions", async (t) => {
   await t.test("signout revokes the stored session", async () => {
     assert.equal((await request("sign-out", {}, { Cookie: cookie })).status, 200);
     assert.equal(await (await request("get-session", undefined, { Cookie: cookie })).json(), null);
+  });
+  await t.test("both social providers build the configured callback URL", async () => {
+    for (const provider of ["google", "github"]) {
+      const response = await request("sign-in/social", { provider, callbackURL: "/", errorCallbackURL: "/signin?error=oauth", disableRedirect: true });
+      assert.equal(response.status, 200);
+      const destination = new URL((await response.json()).url);
+      assert.equal(destination.hostname, provider === "google" ? "accounts.google.com" : "github.com");
+      assert.equal(destination.searchParams.get("redirect_uri"), `http://localhost:3001/api/auth/callback/${provider}`);
+      assert(destination.searchParams.get("state"));
+    }
   });
 });

@@ -715,3 +715,52 @@ a.product-card:hover {
   .ticker-pause-control { display: none; }
   .ticker-viewport { overflow-x: auto; }
 }
+
+.auth-page { width: 100%; max-width: 448px; margin-inline: auto; padding: 40px 16px 48px; }
+.auth-heading { margin-bottom: 24px; }
+.auth-heading h1 { margin: 0 0 8px; font-size: 24px; font-weight: 700; line-height: 32px; }
+.auth-heading p { margin: 0; color: var(--muted); font-size: 14px; line-height: 20px; }
+.auth-card { padding: 24px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); }
+.auth-form { display: grid; gap: 16px; }
+.form-field { display: grid; gap: 6px; }
+.form-label { font-size: 14px; font-weight: 500; }
+.form-input { width: 100%; min-width: 0; min-height: 40px; border: 1px solid #b8c7bc; border-radius: 8px; padding: 8px 12px; background: var(--surface); color: var(--foreground); font-size: 14px; line-height: 22px; }
+.form-input::placeholder { color: #68796c; }
+.password-input { position: relative; }
+.password-input .form-input { padding-right: 44px; }
+.password-toggle { display: grid; position: absolute; right: 2px; top: 2px; width: 38px; height: calc(100% - 4px); place-items: center; border-radius: 6px; color: var(--muted); cursor: pointer; }
+.password-toggle:hover { color: var(--foreground); background: #edf3ed; }
+.auth-submit { width: 100%; font-size: 14px; }
+.auth-divider { display: flex; align-items: center; gap: 12px; margin-block: 20px; color: var(--muted); font-size: 12px; }
+.auth-divider::before, .auth-divider::after { content: ""; height: 1px; flex: 1; background: var(--border); }
+.social-login { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.social-login-button { display: flex; min-width: 0; min-height: 40px; align-items: center; justify-content: center; gap: 6px; padding: 8px; border: 1px solid #b8c7bc; border-radius: 8px; font-size: 12px; cursor: pointer; }
+.social-login-button svg { flex-shrink: 0; }
+.social-login-button:hover:not(:disabled) { background: #edf3ed; }
+.social-login-status { margin: 12px 0 0; color: var(--muted); font-size: 12px; line-height: 18px; }
+.auth-switch { margin: 20px 0 0; text-align: center; font-size: 14px; }
+.auth-switch a, .auth-home-link { color: var(--primary-hover); text-decoration: underline; text-underline-offset: 3px; }
+.auth-home-link { display: block; width: fit-content; margin: 20px auto 0; font-size: 14px; }
+.form-error { margin: 0; color: #b02b35; font-size: 14px; }
+.auth-field-skeleton { display: block; height: 44px; border-radius: 8px; background: var(--border); }
+button:disabled, input:disabled { opacity: .6; cursor: not-allowed; }
+.account-skeleton { display: block; width: 140px; height: 40px; border-radius: 8px; background: var(--border); }
+.account-trigger { display: flex; min-height: 40px; max-width: 240px; align-items: center; gap: 8px; border-radius: 8px; padding: 2px 8px 2px 2px; font-size: 14px; font-weight: 500; cursor: pointer; }
+.account-trigger:hover { background: #edf3ed; }
+.account-avatar { display: grid; flex-shrink: 0; width: 36px; height: 36px; place-items: center; border-radius: 10px; background: #d9eedd; color: #086c34; font-size: 20px; }
+.account-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-dropdown { z-index: 60; width: 256px; max-width: calc(100vw - 32px); padding: 8px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); box-shadow: 0 8px 24px #0000001a; }
+.account-summary { display: grid; gap: 2px; padding: 8px 12px; overflow-wrap: anywhere; }
+.account-summary strong { font-size: 14px; font-weight: 600; }
+.account-summary span { color: var(--muted); font-size: 12px; }
+.account-separator { height: 1px; margin: 4px; background: var(--border); }
+.account-menu-item { display: flex; min-height: 40px; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 8px; font-size: 14px; text-decoration: none; cursor: pointer; }
+.account-menu-item[data-highlighted] { background: #e3eee5; outline: none; }
+.account-menu-item[data-disabled] { opacity: .6; cursor: not-allowed; }
+@media (max-width: 479px) {
+  .auth-page { padding-top: 32px; }
+  .auth-card { padding: 20px; }
+  .form-input { font-size: 16px; min-height: 44px; }
+  .auth-submit, .social-login-button { min-height: 44px; }
+}
+@media (max-width: 359px) { .social-login { grid-template-columns: 1fr; } }

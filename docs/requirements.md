@@ -20,11 +20,11 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 
 ## Main requirements
 
-- [ ] Navbar: logo, বাংলা date, active category, auth buttons ও profile menu
+- [x] Navbar: logo, বাংলা date, active category, auth buttons ও profile menu
 - [x] Design foundation: Hind Siliguri, reference palette ও shared spacing
 - [x] Signed-out Navbar: logo, ঢাকা সময়ের বাংলা date, API category ও account links
 - [x] Category navigation: pathname অনুযায়ী active link, mobile scrolling ও keyboard focus
-- [ ] Signed-in Navbar: session, profile menu ও logout
+- [x] Signed-in Navbar: session, profile menu ও logout
 - [x] Infinite price ticker: emoji, নাম, দাম, unit ও পরিবর্তন; pause ও reduced-motion support
 - [x] Hero: heading, subtitle, image, একই পেজের সব-পণ্য section-এ anchor CTA
 - [x] Home: top 6 risers, top 6 fallers ও সব product cards
@@ -32,17 +32,21 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 - [x] Category: API filter, heading, icon, skeleton ও empty state
 - [ ] Protected `/product/[slug]`: summary, category, unit
 - [ ] Details: minimum, maximum, average ও বাজারভিত্তিক দাম
-- [ ] `/signin`: email/password, Google ও GitHub login
-- [ ] `/signup`: name/email/password ও design অনুযায়ী confirm-password
-- [ ] Email signup শেষে signin; signin ও social login শেষে home
-- [ ] Auth, logout, validation ও protected redirect toast
+- [x] `/signin`: email/password login ও Home redirect
+- [x] Google/GitHub OAuth wiring ও callback error toast
+- [ ] Google/GitHub credentials ও আসল social login যাচাই
+- [x] `/signup`: name/email/password ও design অনুযায়ী confirm-password
+- [x] Email signup শেষে signin; email signin শেষে home
+- [ ] Provider credentials দিয়ে social login শেষে home যাচাই
+- [x] Email auth, logout ও validation toast
+- [ ] Protected redirect toast
 - [x] Footer: reference design ও price disclaimer
 - [ ] Unknown/invalid route-এর friendly 404 ও home CTA
 - [ ] Mobile, tablet ও desktop responsive layout
 - [x] Home fetching-এর সময় skeleton; API failure ও empty data-এর আলাদা state
 - [x] Category fetching-এর সময় skeleton
 
-Shared layout, ticker, Hero, Home ও Category cards 320, 390, 768 ও 1440px-এ যাচাই করা হয়েছে। আটটি category URL সরাসরি load, invalid category, keyboard sorting ও category বদলালে default sorting যাচাই করা হয়েছে। সম্পূর্ণ application-এর responsive check বাকি page তৈরি হওয়ার পরে করা হবে।
+Shared layout, ticker, Hero, Home ও Category cards 320, 390, 768 ও 1440px-এ যাচাই করা হয়েছে। আটটি category URL সরাসরি load, invalid category, keyboard sorting ও category বদলালে default sorting যাচাই করা হয়েছে। Sign In/Sign Up-ও 320, 390, 768 ও 1440px-এ যাচাই করা হয়েছে। সম্পূর্ণ application-এর responsive check বাকি page তৈরি হওয়ার পরে করা হবে।
 
 ## Challenge
 
@@ -53,7 +57,7 @@ Shared layout, ticker, Hero, Home ও Category cards 320, 390, 768 ও 1440px-�
 
 ## Submission
 
-- [ ] অন্তত ৮টি meaningful commits
+- [x] অন্তত ৮টি meaningful commits
 - [ ] Deployment ও Live website link
 - [ ] Home, category, details, signin/signup, profile ও protected route checks
 - [ ] Dynamic URL reload, API, assets, mobile ও console checks

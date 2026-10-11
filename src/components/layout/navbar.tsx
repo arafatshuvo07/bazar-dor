@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 import type { Category } from "@/types/category";
+import { AccountMenu } from "@/components/auth/account-menu";
 import { CategoryNav } from "./category-nav";
 
 type NavbarProps = {
@@ -34,20 +35,7 @@ export function Navbar({
         </Link>
 
         <nav className="auth-links" aria-label="অ্যাকাউন্ট">
-          <Link
-            href="/signin"
-            className="button button-ghost button-sm"
-            prefetch={false}
-          >
-            সাইন ইন
-          </Link>
-          <Link
-            href="/signup"
-            className="button button-primary button-sm"
-            prefetch={false}
-          >
-            সাইন আপ
-          </Link>
+          <AccountMenu />
         </nav>
       </div>
 
