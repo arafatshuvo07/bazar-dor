@@ -5,6 +5,7 @@ import { dirname, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { betterAuth } from "better-auth";
 import { APIError } from "better-auth/api";
+import { Pool } from "pg";
 
 const secret = process.env.BETTER_AUTH_SECRET;
 const baseURL = process.env.BETTER_AUTH_URL;
@@ -12,10 +13,33 @@ if (!secret || secret.length < 32 || !baseURL) {
   throw new Error("Set BETTER_AUTH_SECRET (32+ characters) and BETTER_AUTH_URL before starting the app.");
 }
 
-const databasePath = resolve(/* turbopackIgnore: true */ process.env.DATABASE_PATH || "./.data/auth.sqlite");
-mkdirSync(dirname(databasePath), { recursive: true });
-export const authDatabase = new DatabaseSync(databasePath);
-authDatabase.exec("PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON; PRAGMA busy_timeout = 5000;");
+function createAuthDatabase() {
+  const connectionString = process.env.DATABASE_URL;
+  if (connectionString) {
+    return new Pool({
+      connectionString,
+      max: 3,
+      idleTimeoutMillis: 10_000,
+      connectionTimeoutMillis: 10_000,
+      allowExitOnIdle: true,
+    });
+  }
+  if (process.env.VERCEL) {
+    throw new Error("Set DATABASE_URL to a persistent PostgreSQL database before deploying to Vercel.");
+  }
+  const databasePath = resolve(/* turbopackIgnore: true */ process.env.DATABASE_PATH || "./.data/auth.sqlite");
+  mkdirSync(dirname(databasePath), { recursive: true });
+  const database = new DatabaseSync(databasePath);
+  database.exec("PRAGMA busy_timeout = 5000; PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;");
+  return database;
+}
+
+export const authDatabase = createAuthDatabase();
+
+export async function closeAuthDatabase() {
+  if (authDatabase instanceof Pool) await authDatabase.end();
+  else authDatabase.close();
+}
 
 export const enabledSocialProviders = {
   google: Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET),

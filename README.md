@@ -1,139 +1,101 @@
-# বাজার দর | Bazar Dor
+# Bazar Dor
 
-বাংলাদেশের নিত্যপ্রয়োজনীয় পণ্যের দাম, দামের পরিবর্তন এবং বাজারভিত্তিক তথ্য দেখার Next.js application।
+Track daily essential prices and compare market prices across Bangladesh. Bazar Dor brings current prices, daily changes, category browsing and market comparisons into one Bengali interface.
 
-Assignment: [B14-A7-Bazar-Dor](https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor)
+- [GitHub repository](https://github.com/arafatshuvo07/bazar-dor)
+- [Assignment requirements and design resources](https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor)
 
-## বর্তমান অবস্থা
+## Features
 
-Project setup-এর পরে shared layout তৈরি হয়েছে: Hind Siliguri font, reference-এর রং ও spacing, responsive Navbar এবং Footer। Navbar-এ ঢাকা সময় অনুযায়ী বাংলা তারিখ, API থেকে category এবং সাইন ইন/সাইন আপ links আছে। ছোট screen-এ category তালিকা পাশাপাশি scroll করা যায়।
+- Current prices for rice, lentils, oil, vegetables, fish, meat, dairy and spices from the provided API.
+- Six biggest price increases, six biggest decreases and the complete product list on the home page.
+- Dynamic category pages with default, ascending and descending price sorting.
+- Protected product details with market prices and minimum, maximum and average summaries.
+- Better Auth email/password registration, sign-in, persistent sessions and sign-out.
+- Google and GitHub OAuth integration, enabled when provider credentials are configured.
+- A protected profile with a separate name update form, validation and session refresh.
+- Bengali numbers, Dhaka dates, a price ticker, loading skeletons and toast notifications.
+- Responsive layouts, visible keyboard focus, reduced-motion support and a ticker pause control.
+- Friendly Bengali 404 and error pages with home and retry actions.
 
-Home page-এ supplied design-এর hero, সবচেয়ে বেশি দাম বাড়া/কমা পণ্য এবং সব পণ্যের তালিকা তৈরি হয়েছে। Navbar-এর নিচে API data দিয়ে চলমান price ticker আছে।
+## Technologies
 
-Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Email/password authentication, Sign In/Sign Up, session অনুযায়ী Navbar ও logout তৈরি হয়েছে। Google/GitHub OAuth wiring আছে; provider credentials যোগ করা ও আসল social login যাচাই বাকি। Protected product details-এ server session যাচাই, product summary, category link, বাজারভিত্তিক table এবং সর্বনিম্ন/সর্বাধিক/গড় দাম আছে। Protected My Profile-এ বর্তমান নাম, ইমেইল ও sign out আছে; আলাদা update route থেকে Better Auth দিয়ে নাম পরিবর্তন করা যায়।
+Next.js App Router, React, TypeScript, Tailwind CSS, Better Auth, PostgreSQL/SQLite, Radix UI, React Hot Toast and Phosphor Icons. Bengali typography uses Hind Siliguri.
 
-## প্রযুক্তি
+## Local setup
 
-Next.js App Router, React, TypeScript, Tailwind CSS, Radix UI, Better Auth, React Hot Toast ও Phosphor Icons।
-
-## তৈরি হয়েছে
-
-1. API থেকে সব পণ্যের বর্তমান দাম ও category দেখানো।
-2. পরিবর্তনের শতাংশ অনুযায়ী শীর্ষ ছয়টি দাম বাড়া এবং কমা পণ্য।
-3. বাংলা সংখ্যা, একক এবং দামের পরিবর্তনসহ responsive product cards।
-4. চলমান price ticker, pause control ও reduced-motion support।
-5. Hero থেকে একই পেজের সব পণ্যের তালিকায় যাওয়ার button।
-6. Home-এর loading skeleton, empty state এবং error হলে retry।
-7. Dynamic category route, API filtering ও loading skeleton।
-8. Category page-এ default, কম থেকে বেশি ও বেশি থেকে কম দামে সাজানো।
-9. Better Auth email signup/login, persistent session ও logout।
-10. Form validation, password visibility, বাংলা toast এবং account dropdown।
-11. Protected product details, বাজারের দাম ও সর্বনিম্ন/সর্বাধিক/গড় summary।
-12. Reference অনুযায়ী protected My Profile, নাম/ইমেইল ও sign out।
-13. আলাদা update form, নাম validation, success/error toast ও persistent নাম পরিবর্তন।
-
-## পরবর্তী কাজ
-
-Google/GitHub credentials ও end-to-end social login verification, সব route-এর final review ও deployment।
-
-## চালানোর নিয়ম
-
-Node.js 22.18 বা নতুন সংস্করণ এবং npm ব্যবহার করুন।
+Use Node.js 22.18 or newer and npm.
 
 ```bash
 npm ci
 cp .env.example .env.local
-# .env.local-এ BETTER_AUTH_SECRET এবং BETTER_AUTH_URL বসান
+```
+
+Set `BETTER_AUTH_SECRET` to a random value of at least 32 characters. Generate one with `openssl rand -base64 48`.
+
+```bash
 npm run db:migrate
 npm run dev -- --port 3001
 ```
 
-Default local address: http://localhost:3000। Port ব্যবহৃত থাকলে terminal-এ দেখানো address ব্যবহার করুন।
+Open http://localhost:3001. Keep `BETTER_AUTH_URL` in `.env.local` equal to the browser origin. Change both settings if you use another port.
+
+## Environment variables
+
+| Variable | Purpose |
+| --- | --- |
+| `BETTER_AUTH_SECRET` | Server-side session signing secret |
+| `BETTER_AUTH_URL` | Full application origin |
+| `DATABASE_URL` | Hosted PostgreSQL connection string |
+| `DATABASE_PATH` | Local SQLite file when `DATABASE_URL` is empty |
+| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Google OAuth credentials |
+| `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` | GitHub OAuth credentials |
+
+Secrets and database files are excluded from Git. A configured `DATABASE_URL` selects PostgreSQL; local development falls back to SQLite. Vercel requires a persistent PostgreSQL database. Run the schema migration against the target database before deploying.
+
+## Authentication
+
+Email registration leads to Sign In. Successful sign-in leads to Home. Product details, Profile and Profile Update validate the session on the server. Guests are redirected to Sign In with a Bengali toast.
+
+Register these callback URLs in your provider applications, replacing `<APP_ORIGIN>` with the appropriate local or production origin:
+
+- Google: `<APP_ORIGIN>/api/auth/callback/google`
+- GitHub: `<APP_ORIGIN>/api/auth/callback/github`
+
+For Google, also register `<APP_ORIGIN>` as an authorized JavaScript origin. A provider button remains disabled until its credentials are configured. Automated authorization-URL checks do not replace signing in with a real provider account. Email verification and password recovery are outside this assignment's scope.
+
+Profile updates change only the name. Leading and trailing whitespace is removed. Empty names and names longer than 100 characters are rejected by both the client and server. Submitting is disabled while a request is pending or the name is unchanged.
+
+## API and calculations
+
+Primary API: `https://openapi.programming-hero.com/api/bazardor`
+
+Fallback API: `https://api.abcz.workers.dev/api/bazardor`
+
+Endpoints include `/products`, `/products?category=chal`, `/products/1`, `/categories` and `/categories/chal`. Product slugs are resolved to numeric IDs before details are fetched. Category data is cached for one hour and product data for five minutes. Failed primary requests fall back to the alternative endpoint.
+
+The minimum is the lowest market `min`; the maximum is the highest market `max`. Each market midpoint is `(min + max) / 2`, and the summary average is the arithmetic mean of those midpoints. Empty data displays an explanation instead of invented prices.
+
+## Validation
 
 ```bash
+npm test
 npm run lint
 npm run build
-npm start
+npm start -- --port 3001
 ```
 
-## Folder structure
+Tests cover password hashing, session cookies, invalid credentials, origin checks, revoked sessions, profile persistence, user isolation, product lookup and market calculations. Browser checks cover forms, sorting, protected routes, profile updates, reloads and responsive layouts.
 
-```text
-bazar-dor/
-├── docs/requirements.md
-├── public/images/
-├── src/
-│   ├── app/
-│   │   ├── api/auth/[...all]/
-│   │   ├── category/[slug]/
-│   │   ├── product/[slug]/
-│   │   ├── signin/
-│   │   ├── signup/
-│   │   └── my-profile/update/
-│   ├── components/
-│   │   ├── auth/
-│   │   ├── layout/
-│   │   ├── products/
-│   │   └── ui/
-│   ├── lib/
-│   ├── providers/
-│   └── types/
-├── package.json
-└── package-lock.json
+## Deployment
+
+Vercel is configured through `vercel.json`. Set `DATABASE_URL`, `BETTER_AUTH_SECRET`, the public HTTPS `BETTER_AUTH_URL` and both providers' credentials in the production environment. Apply the database migration before deploying.
+
+Check local configuration with `npm run check:deployment`. If production values are stored in a separate ignored `.env.deploy` file:
+
+```bash
+node --env-file=.env.deploy scripts/check-deployment.mjs
+node --conditions=react-server --env-file=.env.deploy scripts/migrate-auth.mjs
 ```
 
-Empty folders-এ `.gitkeep` আছে। এগুলো এখনো route বা feature implement করে না।
-
-## API
-
-Primary: `https://openapi.programming-hero.com/api/bazardor`
-
-Alternative: `https://api.abcz.workers.dev/api/bazardor`
-
-Endpoints: `/products`, `/products?category=chal`, `/products/1`, `/categories`, `/categories/chal`।
-
-Navbar-এর category data এক ঘণ্টা cache করা হয়। Primary API ব্যর্থ হলে alternative API থেকে চেষ্টা করা হয়; কোনো endpoint থেকেই data না এলে Navbar-এ বাংলায় error message দেখায়।
-
-Category page-এ `/products?category=slug` থেকে data আসে। Sort control সংখ্যাগত দাম দিয়ে সাজায়; ডিফল্টে API-এর মূল ক্রম ফিরে আসে এবং category বদলালে sorting reset হয়।
-
-Product data পাঁচ মিনিট cache করা হয়। Home ও ticker একই request-এর data ব্যবহার করে। দাম কমার শতাংশ API-তে negative হলেও display-তে `▼` চিহ্নের পরে absolute value দেখায়।
-
-## Development
-
-প্রতিটি সম্পূর্ণ কাজের ধাপের পরে meaningful commit করা হবে। Assignment অনুযায়ী অন্তত ৮টি meaningful commit প্রয়োজন। [Requirement checklist](docs/requirements.md)
-
-Live website link deployment-এর পরে যোগ করা হবে।
-
-## Dependency check
-
-Setup-এর সময় `npm audit --omit=dev`-এ কোনো vulnerability পাওয়া যায়নি। Full audit-এ ESLint-এর transitive dependency chain-এ ৫টি high advisory এসেছে; সংশ্লিষ্ট `braces` package-এর patched release এখনো npm-এ পাওয়া যায়নি। Framework downgrade করে automatic force-fix প্রয়োগ করা হয়নি।
-
-## Authentication setup
-
-Better Auth-এর email/password server, session API এবং database migration যুক্ত হয়েছে। `BETTER_AUTH_SECRET`-এ অন্তত ৩২ অক্ষরের random secret দিন (`openssl rand -base64 48`)। `BETTER_AUTH_URL` browser-এর origin-এর সঙ্গে মিলতে হবে; local setup-এ `http://localhost:3001`।
-
-SQLite database `DATABASE_PATH`-এ স্থায়ীভাবে সংরক্ষণ হয়। `.env.local`, database ও journal files Git-এ রাখা হয় না। Schema তৈরি/পরিবর্তনের জন্য `npm run db:migrate`; authentication পরীক্ষা করতে `npm run test:auth`।
-
-Google OAuth app-এর redirect URI: `<BETTER_AUTH_URL>/api/auth/callback/google`। GitHub OAuth app-এর callback: `<BETTER_AUTH_URL>/api/auth/callback/github`। নিজস্ব provider app-এর client ID ও secret `.env.local`-এর সংশ্লিষ্ট চারটি variable-এ বসাতে হবে। Credentials না থাকলে সংশ্লিষ্ট social button বন্ধ থাকে।
-
-বর্তমান SQLite setup local বা persistent disk-সহ Node hosting-এর জন্য। Vercel/Netlify-এর ephemeral filesystem-এ এই database deploy করা যাবে না; deployment ধাপে persistent hosted database যুক্ত করতে হবে।
-
-Email signup-এর পরে Sign In, login-এর পরে Home-এ যাওয়া হয়। Better Auth-এর `autoSignIn: false` duplicate email-এর ক্ষেত্রেও একই signup response দেয়; UI কোনো নতুন account তৈরি হওয়ার মিথ্যা নিশ্চয়তা দেয় না।
-
-`npm run test:auth` password hashing, session cookie, ভুল password, logout revocation, origin checking এবং দুই provider-এর authorize URL যাচাই করে। Browser-এ signup, password mismatch, login, reload-এ session এবং logout যাচাই করা হয়েছে। Provider authorize URL পরীক্ষা আসল Google/GitHub account দিয়ে login পরীক্ষার বিকল্প নয়।
-
-Product URL-এ session যাচাইয়ের পরে slug থেকে numeric ID resolve করে `/products/{id}` ব্যবহার করা হয়। অজানা product-এ friendly 404; সাময়িক সমস্যায় retry দেখায়। Signed-out user toast-সহ Sign In-এ যায়; সফল login-এর গন্তব্য Home। `npm run test:products` দিয়ে data lookup ও route guard যাচাই করা যায়।
-
-## বাজারভিত্তিক হিসাব
-
-সর্বনিম্ন দাম সব বাজারের `min`-এর সর্বনিম্ন মান; সর্বাধিক দাম সব `max`-এর সর্বোচ্চ মান। প্রতিটি বাজারের গড় `(min + max) / 2`; summary-তে এই গড়গুলোর arithmetic mean দেখানো হয়। Display-তে সর্বোচ্চ দুই decimal ব্যবহার করা হয়। বাজারের data ফাঁকা থাকলে দাম বানিয়ে দেখানো হয় না।
-
-Product details-এ 320, 390, 768 ও 1440px layout, keyboard table scrolling, direct URL reload, invalid slug, guest/forged/revoked session এবং logout-এর পর Back navigation যাচাই করা হয়েছে। Hosted database/deployment এবং credential-সহ social login যাচাই বাকি।
-
-## প্রোফাইল
-
-`/my-profile` এবং `/my-profile/update` প্রতিটি request-এ server session যাচাই করে। Login না থাকলে বাংলা toast-সহ Sign In-এ নেয়। Profile-এর update link আলাদা form খোলে; শুধু নাম editable, ইমেইল অপরিবর্তিত থাকে। `authClient.updateUser` সফল হলে Profile-এ ফিরে নতুন নাম দেখায় এবং Navbar-এর session refresh হয়।
-
-নামের দুই পাশের ফাঁকা জায়গা বাদ দেওয়া হয়। ফাঁকা নাম বা ১০০ অক্ষরের বেশি নাম client ও server-এ reject হয়; অপরিবর্তিত নাম এবং request চলার সময় submit বন্ধ থাকে। Authentication test-এ নাম database-এ persist হওয়া, নতুন session-এ পাওয়া, অন্য user ID পাঠিয়েও অন্যের নাম বদলাতে না পারা এবং logout-এর পরে update reject হওয়া যাচাই করা হয়।
-
-Profile ও update form-এর mobile/tablet/desktop layout, direct reload, নাম update-এর পরে Navbar refresh, cancel, session expiry এবং sign out যাচাই করা হয়েছে। Production server restart ও আবার sign in করার পরেও পরিবর্তিত নাম পাওয়া গেছে।
+After deployment, verify Home, Category, Product Details, Sign In/Sign Up, Profile, both social providers and direct URL reloads. The [requirement checklist](docs/requirements.md) records verification status.

@@ -8,6 +8,8 @@ import { getMigrations } from "better-auth/db/migration";
 
 test("email authentication persists users and revokes sessions", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "bazar-auth-"));
+  delete process.env.DATABASE_URL;
+  delete process.env.VERCEL;
   process.env.DATABASE_PATH = join(directory, "test.sqlite");
   process.env.BETTER_AUTH_SECRET = randomBytes(48).toString("base64url");
   process.env.BETTER_AUTH_URL = "http://localhost:3001";

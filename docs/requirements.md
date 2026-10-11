@@ -41,7 +41,7 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 - [x] Email auth, logout ও validation toast
 - [x] Protected redirect toast
 - [x] Footer: reference design ও price disclaimer
-- [ ] Unknown/invalid route-এর friendly 404 ও home CTA
+- [x] Unknown/invalid route-এর friendly 404 ও home CTA
 - [ ] Mobile, tablet ও desktop responsive layout
 - [x] Home fetching-এর সময় skeleton; API failure ও empty data-এর আলাদা state
 - [x] Category fetching-এর সময় skeleton
@@ -62,7 +62,7 @@ Shared layout, ticker, Hero, Home ও Category cards 320, 390, 768 ও 1440px-�
 - [ ] Deployment ও Live website link
 - [ ] Home, category, details, signin/signup, profile ও protected route checks
 - [ ] Dynamic URL reload, API, assets, mobile ও console checks
-- [ ] GitHub repository link
+- [x] GitHub repository link
 
 Email verification ও forgot password এই assignment-এর অংশ নয়।
 
