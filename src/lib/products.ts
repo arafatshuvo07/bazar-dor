@@ -74,3 +74,36 @@ async function loadProducts(category?: string): Promise<Product[]> {
 }
 
 export const getProducts = cache(loadProducts);
+
+async function loadProductBySlug(slug: string): Promise<Product | null> {
+  "use cache";
+  cacheLife({ stale: 300, revalidate: 300, expire: 3600 });
+
+  const products = await getProducts();
+  const match = products.find((product) => product.slug === slug);
+  if (!match) return null;
+
+  let missingResponses = 0;
+  for (const endpoint of productEndpoints) {
+    try {
+      const response = await fetch(`${endpoint}/${match.id}`, {
+        headers: { Accept: "application/json" },
+        signal: AbortSignal.timeout(5000),
+      });
+      if (response.status === 404) {
+        missingResponses += 1;
+        continue;
+      }
+      if (!response.ok) continue;
+      const data: unknown = await response.json();
+      if (isProduct(data) && data.id === match.id && data.slug === slug) return data;
+    } catch {
+      continue;
+    }
+  }
+
+  if (missingResponses === productEndpoints.length) return null;
+  throw new Error("Product details are unavailable");
+}
+
+export const getProductBySlug = cache(loadProductBySlug);

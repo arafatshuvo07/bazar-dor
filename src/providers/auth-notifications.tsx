@@ -15,8 +15,14 @@ export function AuthNotifications() {
   const pathname = usePathname();
   const router = useRouter();
   const oauthError = pathname === "/signin" && searchParams.has("error");
+  const loginRequired = pathname === "/signin" && searchParams.get("reason") === "login-required";
 
   useEffect(() => {
+    if (loginRequired) {
+      toast.error("পণ্যের বিস্তারিত দেখতে আগে সাইন ইন করুন।", { id: "login-required" });
+      router.replace("/signin", { scroll: false });
+      return;
+    }
     if (oauthError) {
       try { sessionStorage.removeItem("bazar:oauth-pending"); } catch {}
       toast.error("Social login সম্পূর্ণ হয়নি। আবার চেষ্টা করুন অথবা ইমেইল দিয়ে সাইন ইন করুন।", { id: "oauth-result" });
@@ -31,7 +37,7 @@ export function AuthNotifications() {
         }
       } catch {}
     }
-  }, [session?.user, pathname, oauthError, router]);
+  }, [session?.user, pathname, oauthError, loginRequired, router]);
 
   return null;
 }

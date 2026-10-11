@@ -764,3 +764,27 @@ button:disabled, input:disabled { opacity: .6; cursor: not-allowed; }
   .auth-submit, .social-login-button { min-height: 44px; }
 }
 @media (max-width: 359px) { .social-login { grid-template-columns: 1fr; } }
+
+.product-detail-page { padding-block: 24px 48px; }
+.product-breadcrumb { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; color: var(--muted); font-size: 14px; }
+.product-breadcrumb a:hover { color: var(--primary-hover); text-decoration: underline; }
+.product-summary { display: flex; min-width: 0; min-height: 174px; align-items: center; justify-content: space-between; gap: 24px; padding: 20px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); }
+.product-summary-heading { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.product-summary-emoji { display: grid; flex-shrink: 0; width: 48px; height: 48px; place-items: center; font-size: 36px; }
+.product-summary h1 { margin: 0 0 4px; font-size: 30px; font-weight: 700; line-height: 36px; }
+.product-summary-heading p { margin: 0; color: var(--muted); font-size: 14px; }
+.product-summary-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; font-size: 12px; }
+.product-summary-tags > * { padding: 4px 10px; border: 1px solid var(--border); border-radius: 8px; }
+.product-summary-tags a:hover { border-color: var(--primary); }
+.product-summary-price { display: flex; flex-shrink: 0; align-items: flex-end; gap: 16px; }
+.product-summary-price strong { font-size: 30px; line-height: 36px; }
+.product-error-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 767px) {
+  .product-summary { align-items: flex-start; flex-direction: column; padding: 20px; }
+  .product-summary h1 { font-size: 24px; line-height: 32px; }
+  .product-summary-emoji { width: 56px; height: 56px; font-size: 36px; }
+  .product-summary-price { width: 100%; justify-content: space-between; }
+}
+
+.product-summary-heading .product-summary-change { margin-top: 8px; }
+.product-price-unit { display: block; color: var(--muted); font-size: 12px; }

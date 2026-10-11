@@ -10,7 +10,7 @@ Project setup-এর পরে shared layout তৈরি হয়েছে: Hind 
 
 Home page-এ supplied design-এর hero, সবচেয়ে বেশি দাম বাড়া/কমা পণ্য এবং সব পণ্যের তালিকা তৈরি হয়েছে। Navbar-এর নিচে API data দিয়ে চলমান price ticker আছে।
 
-Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Email/password authentication, Sign In/Sign Up, session অনুযায়ী Navbar ও logout তৈরি হয়েছে। Google/GitHub OAuth wiring আছে; provider credentials যোগ করা ও আসল social login যাচাই বাকি। Protected product details ও profile পরবর্তী ধাপে তৈরি হবে; product ও profile links-এর গন্তব্য page এখনো তৈরি হয়নি।
+Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Email/password authentication, Sign In/Sign Up, session অনুযায়ী Navbar ও logout তৈরি হয়েছে। Google/GitHub OAuth wiring আছে; provider credentials যোগ করা ও আসল social login যাচাই বাকি। Protected product route-এ server session যাচাই, product summary ও category link আছে। বাজারভিত্তিক বিস্তারিত ও My Profile-এর কাজ বাকি।
 
 ## প্রযুক্তি
 
@@ -31,7 +31,7 @@ Next.js App Router, React, TypeScript, Tailwind CSS, Radix UI, Better Auth, Reac
 
 ## পরবর্তী কাজ
 
-Google/GitHub credentials ও end-to-end social login verification, protected product details এবং My Profile থেকে নাম update।
+Google/GitHub credentials ও end-to-end social login verification, বাজারভিত্তিক product details এবং My Profile থেকে নাম update।
 
 ## চালানোর নিয়ম
 
@@ -118,3 +118,5 @@ Google OAuth app-এর redirect URI: `<BETTER_AUTH_URL>/api/auth/callback/googl
 Email signup-এর পরে Sign In, login-এর পরে Home-এ যাওয়া হয়। Better Auth-এর `autoSignIn: false` duplicate email-এর ক্ষেত্রেও একই signup response দেয়; UI কোনো নতুন account তৈরি হওয়ার মিথ্যা নিশ্চয়তা দেয় না।
 
 `npm run test:auth` password hashing, session cookie, ভুল password, logout revocation, origin checking এবং দুই provider-এর authorize URL যাচাই করে। Browser-এ signup, password mismatch, login, reload-এ session এবং logout যাচাই করা হয়েছে। Provider authorize URL পরীক্ষা আসল Google/GitHub account দিয়ে login পরীক্ষার বিকল্প নয়।
+
+Product URL-এ session যাচাইয়ের পরে slug থেকে numeric ID resolve করে `/products/{id}` ব্যবহার করা হয়। অজানা product-এ friendly 404; সাময়িক সমস্যায় retry দেখায়। Signed-out user toast-সহ Sign In-এ যায়; সফল login-এর গন্তব্য Home। `npm run test:products` দিয়ে data lookup ও route guard যাচাই করা যায়।

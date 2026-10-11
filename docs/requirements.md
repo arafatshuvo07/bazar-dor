@@ -30,7 +30,7 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 - [x] Home: top 6 risers, top 6 fallers ও সব product cards
 - [x] Cards: emoji, নাম, unit, বাংলায় দাম ও change badge
 - [x] Category: API filter, heading, icon, skeleton ও empty state
-- [ ] Protected `/product/[slug]`: summary, category, unit
+- [x] Protected `/product/[slug]`: summary, category, unit
 - [ ] Details: minimum, maximum, average ও বাজারভিত্তিক দাম
 - [x] `/signin`: email/password login ও Home redirect
 - [x] Google/GitHub OAuth wiring ও callback error toast
@@ -39,7 +39,7 @@ Source: https://github.com/ProgrammingHero1/B14-A7-Bazar-Dor
 - [x] Email signup শেষে signin; email signin শেষে home
 - [ ] Provider credentials দিয়ে social login শেষে home যাচাই
 - [x] Email auth, logout ও validation toast
-- [ ] Protected redirect toast
+- [x] Protected redirect toast
 - [x] Footer: reference design ও price disclaimer
 - [ ] Unknown/invalid route-এর friendly 404 ও home CTA
 - [ ] Mobile, tablet ও desktop responsive layout
