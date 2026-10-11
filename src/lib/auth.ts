@@ -4,6 +4,7 @@ import { mkdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { betterAuth } from "better-auth";
+import { APIError } from "better-auth/api";
 
 const secret = process.env.BETTER_AUTH_SECRET;
 const baseURL = process.env.BETTER_AUTH_URL;
@@ -26,6 +27,23 @@ export const auth = betterAuth({
   secret,
   baseURL,
   database: authDatabase,
+  databaseHooks: {
+    user: {
+      update: {
+        before: async (user) => {
+          if (user.name === undefined) return;
+          if (typeof user.name !== "string") {
+            throw new APIError("BAD_REQUEST", { message: "Name must be a string." });
+          }
+          const name = user.name.trim();
+          if (!name || name.length > 100) {
+            throw new APIError("BAD_REQUEST", { message: "Name must contain 1 to 100 characters." });
+          }
+          return { data: { ...user, name } };
+        },
+      },
+    },
+  },
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,

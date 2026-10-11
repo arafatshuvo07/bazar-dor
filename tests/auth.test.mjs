@@ -48,12 +48,49 @@ test("email authentication persists users and revokes sessions", async (t) => {
     const session = await (await request("get-session", undefined, { Cookie: cookie })).json();
     assert.equal(session.user.email, account.email);
   });
+  await t.test("profile changes require a live session", async () => {
+    assert.equal((await request("update-user", { name: "অন্য নাম" })).status, 401);
+    assert.equal((await request("update-user", { name: "অন্য নাম" }, { Cookie: "better-auth.session_token=forged" })).status, 401);
+  });
+  await t.test("name updates are trimmed, persisted and visible in the next session", async () => {
+    const response = await request("update-user", { name: "  নতুন নাম  " }, { Cookie: cookie });
+    assert.equal(response.status, 200);
+    const row = authDatabase.prepare('SELECT name, email FROM user WHERE email = ?').get(account.email);
+    assert.equal(row.name, "নতুন নাম");
+    assert.equal(row.email, account.email);
+    const session = await (await request("get-session", undefined, { Cookie: cookie })).json();
+    assert.equal(session.user.name, "নতুন নাম");
+  });
+  await t.test("invalid names and email changes leave the profile unchanged", async () => {
+    for (const name of ["", "   ", "ক".repeat(101), 123, null, {}, []]) {
+      assert.equal((await request("update-user", { name }, { Cookie: cookie })).status, 400);
+    }
+    assert.equal((await request("update-user", { email: "different@example.test" }, { Cookie: cookie })).status, 400);
+    const row = authDatabase.prepare('SELECT name, email FROM user WHERE email = ?').get(account.email);
+    assert.equal(row.name, "নতুন নাম");
+    assert.equal(row.email, account.email);
+  });
+  await t.test("a supplied user ID cannot redirect an update to another account", async () => {
+    const other = { ...account, name: "দ্বিতীয় ব্যবহারকারী", email: "other-auth-test@example.test" };
+    assert.equal((await request("sign-up/email", other)).status, 200);
+    const otherUser = authDatabase.prepare('SELECT id FROM user WHERE email = ?').get(other.email);
+    const response = await request("update-user", { name: "নিজের নাম", id: otherUser.id, userId: otherUser.id }, { Cookie: cookie });
+    assert.equal(response.status, 200);
+    assert.equal(authDatabase.prepare('SELECT name FROM user WHERE email = ?').get(other.email).name, other.name);
+    assert.equal(authDatabase.prepare('SELECT name FROM user WHERE email = ?').get(account.email).name, "নিজের নাম");
+  });
   await t.test("cross-origin mutation is rejected", async () => {
     assert.equal((await request("sign-out", {}, { Cookie: cookie, Origin: "https://untrusted.example" })).status, 403);
   });
   await t.test("signout revokes the stored session", async () => {
     assert.equal((await request("sign-out", {}, { Cookie: cookie })).status, 200);
     assert.equal(await (await request("get-session", undefined, { Cookie: cookie })).json(), null);
+    assert.equal((await request("update-user", { name: "অন্য নাম" }, { Cookie: cookie })).status, 401);
+  });
+  await t.test("the updated name survives signing in again", async () => {
+    const response = await request("sign-in/email", account);
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).user.name, "নিজের নাম");
   });
   await t.test("both social providers build the configured callback URL", async () => {
     for (const provider of ["google", "github"]) {

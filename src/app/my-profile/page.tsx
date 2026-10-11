@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ProfileSignOut } from "@/components/auth/profile-sign-out";
 import { requireProfileSession } from "@/lib/profile-session";
 
-export const metadata: Metadata = { title: "আমার প্রোফাইল | বাজার দর" };
+export const metadata: Metadata = { title: "আমার প্রোফাইল" };
 
 export default async function ProfilePage() {
   const { user } = await requireProfileSession();

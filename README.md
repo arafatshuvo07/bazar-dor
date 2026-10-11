@@ -10,7 +10,7 @@ Project setup-এর পরে shared layout তৈরি হয়েছে: Hind 
 
 Home page-এ supplied design-এর hero, সবচেয়ে বেশি দাম বাড়া/কমা পণ্য এবং সব পণ্যের তালিকা তৈরি হয়েছে। Navbar-এর নিচে API data দিয়ে চলমান price ticker আছে।
 
-Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Email/password authentication, Sign In/Sign Up, session অনুযায়ী Navbar ও logout তৈরি হয়েছে। Google/GitHub OAuth wiring আছে; provider credentials যোগ করা ও আসল social login যাচাই বাকি। Protected product details-এ server session যাচাই, product summary, category link, বাজারভিত্তিক table এবং সর্বনিম্ন/সর্বাধিক/গড় দাম আছে। Protected My Profile-এ বর্তমান নাম, ইমেইল ও sign out আছে; নাম update-এর কাজ পরের ধাপে।
+Category page-এ API থেকে নির্দিষ্ট ক্যাটাগরির পণ্য, শিরোনাম ও সংখ্যা দেখানো হয়। ভুল বা ফাঁকা ক্যাটাগরিতে হোমে ফেরার link এবং সংযোগের সমস্যায় retry আছে। Email/password authentication, Sign In/Sign Up, session অনুযায়ী Navbar ও logout তৈরি হয়েছে। Google/GitHub OAuth wiring আছে; provider credentials যোগ করা ও আসল social login যাচাই বাকি। Protected product details-এ server session যাচাই, product summary, category link, বাজারভিত্তিক table এবং সর্বনিম্ন/সর্বাধিক/গড় দাম আছে। Protected My Profile-এ বর্তমান নাম, ইমেইল ও sign out আছে; আলাদা update route থেকে Better Auth দিয়ে নাম পরিবর্তন করা যায়।
 
 ## প্রযুক্তি
 
@@ -30,10 +30,11 @@ Next.js App Router, React, TypeScript, Tailwind CSS, Radix UI, Better Auth, Reac
 10. Form validation, password visibility, বাংলা toast এবং account dropdown।
 11. Protected product details, বাজারের দাম ও সর্বনিম্ন/সর্বাধিক/গড় summary।
 12. Reference অনুযায়ী protected My Profile, নাম/ইমেইল ও sign out।
+13. আলাদা update form, নাম validation, success/error toast ও persistent নাম পরিবর্তন।
 
 ## পরবর্তী কাজ
 
-Google/GitHub credentials ও end-to-end social login verification, My Profile থেকে নাম update ও deployment।
+Google/GitHub credentials ও end-to-end social login verification, সব route-এর final review ও deployment।
 
 ## চালানোর নিয়ম
 
@@ -127,4 +128,12 @@ Product URL-এ session যাচাইয়ের পরে slug থেকে num
 
 সর্বনিম্ন দাম সব বাজারের `min`-এর সর্বনিম্ন মান; সর্বাধিক দাম সব `max`-এর সর্বোচ্চ মান। প্রতিটি বাজারের গড় `(min + max) / 2`; summary-তে এই গড়গুলোর arithmetic mean দেখানো হয়। Display-তে সর্বোচ্চ দুই decimal ব্যবহার করা হয়। বাজারের data ফাঁকা থাকলে দাম বানিয়ে দেখানো হয় না।
 
-Product details-এ 320, 390, 768 ও 1440px layout, keyboard table scrolling, direct URL reload, invalid slug, guest/forged/revoked session এবং logout-এর পর Back navigation যাচাই করা হয়েছে। Profile page, hosted database/deployment এবং credential-সহ social login যাচাই বাকি।
+Product details-এ 320, 390, 768 ও 1440px layout, keyboard table scrolling, direct URL reload, invalid slug, guest/forged/revoked session এবং logout-এর পর Back navigation যাচাই করা হয়েছে। Hosted database/deployment এবং credential-সহ social login যাচাই বাকি।
+
+## প্রোফাইল
+
+`/my-profile` এবং `/my-profile/update` প্রতিটি request-এ server session যাচাই করে। Login না থাকলে বাংলা toast-সহ Sign In-এ নেয়। Profile-এর update link আলাদা form খোলে; শুধু নাম editable, ইমেইল অপরিবর্তিত থাকে। `authClient.updateUser` সফল হলে Profile-এ ফিরে নতুন নাম দেখায় এবং Navbar-এর session refresh হয়।
+
+নামের দুই পাশের ফাঁকা জায়গা বাদ দেওয়া হয়। ফাঁকা নাম বা ১০০ অক্ষরের বেশি নাম client ও server-এ reject হয়; অপরিবর্তিত নাম এবং request চলার সময় submit বন্ধ থাকে। Authentication test-এ নাম database-এ persist হওয়া, নতুন session-এ পাওয়া, অন্য user ID পাঠিয়েও অন্যের নাম বদলাতে না পারা এবং logout-এর পরে update reject হওয়া যাচাই করা হয়।
+
+Profile ও update form-এর mobile/tablet/desktop layout, direct reload, নাম update-এর পরে Navbar refresh, cancel, session expiry এবং sign out যাচাই করা হয়েছে। Production server restart ও আবার sign in করার পরেও পরিবর্তিত নাম পাওয়া গেছে।
